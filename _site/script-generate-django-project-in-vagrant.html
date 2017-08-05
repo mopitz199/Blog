@@ -1,0 +1,43 @@
+<h3 id="script-to-generate-a-django-app-with-vagrant">Script to generate a Django App with Vagrant</h3>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="nv">VIRTUALENV_NAME</span><span class="o">=</span><span class="s2">"vagrantdev"</span>
+<span class="nv">DB_USER</span><span class="o">=</span><span class="s2">"vagrantuser"</span>
+<span class="nv">DB_NAME</span><span class="o">=</span><span class="s2">"vagrantdb"</span>
+<span class="nv">DB_PASSWORD</span><span class="o">=</span><span class="s2">"vagrantpass"</span>
+
+<span class="c"># Install of pip and their dependencies</span>
+sudo apt-get update
+sudo apt-get install python-pip libpq-dev python-dev build-essential
+sudo pip install --upgrade pip
+sudo pip install --upgrade virtualenv
+sudo pip install --upgrade setuptools
+
+<span class="c"># Install postgres</span>
+sudo apt-get install postgresql postgresql-contrib
+
+<span class="c"># Create databse</span>
+sudo -u postgres psql -c <span class="s2">"CREATE DATABASE </span><span class="nv">$DB_NAME</span><span class="s2">;"</span>
+sudo -u postgres psql -c <span class="s2">"CREATE USER </span><span class="nv">$DB_USER</span><span class="s2"> WITH PASSWORD '</span><span class="nv">$DB_PASSWORD</span><span class="s2">';"</span>
+sudo -u postgres psql -c <span class="s2">"ALTER ROLE </span><span class="nv">$DB_USER</span><span class="s2"> SET client_encoding TO 'utf8';"</span>
+sudo -u postgres psql -c <span class="s2">"ALTER ROLE </span><span class="nv">$DB_USER</span><span class="s2"> SET default_transaction_isolation TO 'read committed';"</span>
+sudo -u postgres psql -c <span class="s2">"ALTER ROLE </span><span class="nv">$DB_USER</span><span class="s2"> SET timezone TO 'UTC';"</span>
+sudo -u postgres psql -c <span class="s2">"GRANT ALL PRIVILEGES ON DATABASE </span><span class="nv">$DB_NAME</span><span class="s2"> TO </span><span class="nv">$DB_NAME</span><span class="s2">;"</span>
+
+
+<span class="c"># Install virtualenvwrapper</span>
+sudo pip install virtualenvwrapper
+<span class="nb">export </span><span class="nv">WORKON_HOME</span><span class="o">=</span>~/Envs
+<span class="nb">source</span> /usr/local/bin/virtualenvwrapper.sh
+mkvirtualenv <span class="nv">$VIRTUALENV_NAME</span>
+workon <span class="nv">$VIRTUALENV_NAME</span>
+
+
+<span class="c"># Install django</span>
+pip install -r requirements.txt
+
+python manage.py makemigrations
+python manage.py migrate
+</code></pre>
+</div>

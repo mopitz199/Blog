@@ -1,8 +1,8 @@
 # General Settings
-name: Maximiliano Opitz
-job_title: UI/UX Engineer
-email: youremail@gmail.com
-description: I build great products at Google, currently Google Maps. I also enjoy capturing moments with my camera and discovering new music. Follow me Twitter or drop me a line.
+name: Maximiliano Opitz Turra
+job_title: Software Engineer
+email: mopitz199@gmail.com
+description: I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.
 avatar: /assets/perfil.jpg
 favicon: /favicon.ico
 twitter_handler: your_handler
@@ -11,20 +11,20 @@ disqus: your_disqus_site
 
 # Social Accounts
 social_networks:
--  { name: facebook, url: 'http://facebook.com' }
--  { name: twitter, url: 'http://twitter.com' }
+-  { name: facebook, url: 'https://www.facebook.com/mturra' }
+-  { name: twitter, url: '' }
 -  { name: instagram, url: '' }
 -  { name: google-plus, url: '' }
--  { name: linkedin, url: '' }
+-  { name: linkedin, url: 'https://www.linkedin.com/in/mopitz199' }
 -  { name: skype, url: '' }
--  { name: github, url: '' }
+-  { name: github, url: 'https://github.com/mopitz199' }
 -  { name: codepen, url: '' }
 -  { name: stack-overflow, url: '' }
 -  { name: dribbble, url: '' }
 -  { name: behance, url: '' }
 -  { name: pinterest, url: '' }
 -  { name: tumblr, url: '' }
--  { name: youtube, url: '' }
+-  { name: youtube, url: 'https://www.youtube.com/channel/UC4vxgNgkH9san9rcuEMdDAA' }
 -  { name: vimeo, url: '' }
 -  { name: vine, url: '' }
 -  { name: 500px, url: '' }
@@ -39,7 +39,7 @@ social_networks:
 show_categories: 1
 show_tags: 1
 show_email: 1
-show_rss: 1
+show_rss: 0
 show_comments: 1
 show_menu: 1
 fixed_sidebar: 1
@@ -76,3 +76,6 @@ excerpt_separator: <!--more-->
 sass:
   sass_dir: assets/partials
   style: compressed
+
+# Hightlights
+highlighter: rouge

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Add a tab and a menu in the same Ionic 2 project | Maximiliano Opitz Turra &mdash; Software Engineer </title>
+    <meta property="og:title" content="Add a tab and a menu in the same Ionic 2 project | Maximiliano Opitz Turra &mdash; Software Engineer " />
+    <meta name="twitter:title" content="Add a tab and a menu in the same Ionic 2 project | Maximiliano Opitz Turra &mdash; Software Engineer " />
+
+    <meta name="description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.">
+    <meta name="description" property="og:description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks." />
+    <meta name="twitter:description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <meta name="twitter:site" content="@your_handler" />
+    
+    <meta property="og:url" content="/add-a-tab-and-a-menu-in-the-same-ionic-2-project.html" />
+
+    <meta property="og:image" content="" />
+    <meta name="twitter:image" content="" />
+
+    <meta name="author" content="Maximiliano Opitz Turra" />
+
+    <meta name="copyright" content="Copyright by Maximiliano Opitz Turra. All Rights Reserved." />
+
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v15/CWB0XYA8bzo0kSThX0UTuA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local('Roboto-Black'), url(https://fonts.gstatic.com/s/roboto/v15/mnpfi9pxYH-Go5UiibESIltXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 300;
+            src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://fonts.gstatic.com/s/roboto/v15/7m8l7TlFO-S3VkhHuR0at44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 400;
+            src: local('Roboto Italic'), local('Roboto-Italic'), url(https://fonts.gstatic.com/s/roboto/v15/vPcynSL0qHq_6dX7lKVByfesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 700;
+            src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(https://fonts.gstatic.com/s/roboto/v15/t6Nd4cfPRhZP44Q5QAjcC44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 900;
+            src: local('Roboto Black Italic'), local('Roboto-BlackItalic'), url(https://fonts.gstatic.com/s/roboto/v15/bmC0pGMXrhphrZJmniIZpY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+    </style>
+    
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <link rel="canonical" href="/add-a-tab-and-a-menu-in-the-same-ionic-2-project.html">
+
+    <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
+</head>
+
+    <body>
+        <div class="wrapper clear">
+            <aside class="user-profile fixed" role="complementary">
+    <a href=""><img class="avatar" src="/assets/perfil.jpg" /></a>
+    <strong class="my-name">Maximiliano Opitz Turra</strong>
+    <span class="my-job-title">Software Engineer</span>
+
+    
+        
+        <div class="mainmenu">
+            <a href="/" >Home</a>
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a href="/portfolio/" >Portfolio</a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </div>
+        
+    
+
+    <p class="about-me">I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.</p>
+
+    <ul>
+        <li><a href="https://www.facebook.com/mturra"><svg title="facebook" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></li><li><a href="https://www.linkedin.com/in/mopitz199"><svg title="linkedin" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#linkedin-icon"></use></svg></a></li><li><a href="https://github.com/mopitz199"><svg title="github" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#github-icon"></use></svg></a></li><li><a href="https://www.youtube.com/channel/UC4vxgNgkH9san9rcuEMdDAA"><svg title="youtube" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#youtube-icon"></use></svg></a></li>
+
+        
+            <li><a href="mailto:mopitz199@gmail.com"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#email-icon"></use></svg></a></li>
+        
+
+        
+    </ul>
+</aside>
+
+
+            <main class="the-content" role="main">
+                <div class="search" role="search">
+    <div>
+        <div class="show-results-count">0 Results</div>
+        <div class="search-holder clear">
+            <input type="text" id="search-input" placeholder="search for...">
+        </div>
+    </div>
+    <ul id="results-container" class="results-container"></ul>
+</div>
+
+
+                <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <ul class="clear">
+            <li><time datetime="2017-02-11T00:00:00-03:00" itemprop="datePublished">11 Feb, 2017</time></li>
+            
+        </ul>
+        <h2 itemprop="name headline">Add a tab and a menu in the same Ionic 2 project</h2>
+    </header>
+
+    <div class="post-content">
+        <p>Hello everyone in this article I’ll show you how to create a blank Ionic 2 project and add the tabs + menu tools at the same time and how to manage it, let’s start!</p>
+
+<!--more-->
+
+<p><strong>1.</strong> First we should create an empty Ionic 2 project</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo ionic start TabMenuProject blank --v2
+</code></pre>
+</div>
+
+<p><strong>2.</strong> Now, we’re going to create the menu. in our app.html add this code that will be the menu:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ion-menu</span> <span class="err">[</span><span class="na">content</span><span class="err">]="</span><span class="na">content</span><span class="err">"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ion-header&gt;</span>
+    <span class="nt">&lt;ion-toolbar&gt;</span>
+      <span class="nt">&lt;ion-title&gt;</span>Pages<span class="nt">&lt;/ion-title&gt;</span>
+    <span class="nt">&lt;/ion-toolbar&gt;</span>
+  <span class="nt">&lt;/ion-header&gt;</span>
+  <span class="nt">&lt;ion-content&gt;</span>
+    <span class="nt">&lt;ion-list&gt;</span>
+      <span class="nt">&lt;button</span> <span class="na">ion-item</span><span class="nt">&gt;</span>
+        Login
+      <span class="nt">&lt;/button&gt;</span>
+      <span class="nt">&lt;button</span> <span class="na">ion-item</span><span class="nt">&gt;</span>
+        Signup
+      <span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/ion-list&gt;</span>
+  <span class="nt">&lt;/ion-content&gt;</span>
+<span class="nt">&lt;/ion-menu&gt;</span>
+</code></pre>
+</div>
+
+<p>and don’t forget to make the reference to the menu:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ion-nav</span> <span class="err">#</span><span class="na">content</span> <span class="err">[</span><span class="na">root</span><span class="err">]="</span><span class="na">rootPage</span><span class="err">"</span><span class="nt">&gt;&lt;/ion-nav&gt;</span>
+</code></pre>
+</div>
+
+<p><strong>3.</strong> The menu is created but there’s no button to show it, so in the home.html edit the header:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ion-header&gt;</span>
+  <span class="nt">&lt;ion-navbar&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">ion-button</span> <span class="na">menuToggle</span> <span class="na">icon-only</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;ion-icon</span> <span class="na">name=</span><span class="s">'menu'</span><span class="nt">&gt;&lt;/ion-icon&gt;</span>
+    <span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;ion-title&gt;</span>
+      Ionic Blank
+    <span class="nt">&lt;/ion-title&gt;</span>
+  <span class="nt">&lt;/ion-navbar&gt;</span>
+<span class="nt">&lt;/ion-header&gt;</span>
+</code></pre>
+</div>
+
+<p>Great! now we have the menu and we can show it without any problems. The second part is the tab, so go for it!</p>
+
+<p><strong>4.</strong> Generate a new page that will be that tab, in the terminal:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo ionic generate page tabs
+</code></pre>
+</div>
+
+<p><strong>5.</strong> Generate another page just for the proper way to show the tab example:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo ionic generate page contact
+</code></pre>
+</div>
+
+<p><strong>6.</strong> We have to create our tabs, so go to the tabs.html, remove all the code and add this code:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ion-tabs&gt;</span>
+  <span class="nt">&lt;ion-tab</span> <span class="na">tabIcon=</span><span class="s">"heart"</span> <span class="err">[</span><span class="na">root</span><span class="err">]="</span><span class="na">tab1</span><span class="err">"</span><span class="nt">&gt;&lt;/ion-tab&gt;</span>
+  <span class="nt">&lt;ion-tab</span> <span class="na">tabIcon=</span><span class="s">"star"</span> <span class="err">[</span><span class="na">root</span><span class="err">]="</span><span class="na">tab2</span><span class="err">"</span><span class="nt">&gt;&lt;/ion-tab&gt;</span>
+<span class="nt">&lt;/ion-tabs&gt;</span>
+</code></pre>
+</div>
+
+<p>where each ion-tab will be a tab, in this case, “home” and “contact”</p>
+
+<p><strong>7.</strong> Now we have to link the tab that we just created with the pages, so in the tabs.ts the class should be something like this:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kr">class</span> <span class="nx">TabsPage</span> <span class="p">{</span>
+  <span class="k">public</span> <span class="nx">tab1</span><span class="err">:</span><span class="kr">any</span><span class="p">;</span>
+  <span class="k">public</span> <span class="nx">tab2</span><span class="err">:</span><span class="kr">any</span><span class="p">;</span>
+  <span class="kd">constructor</span><span class="p">(</span>
+    <span class="k">public</span> <span class="nx">navCtrl</span><span class="err">:</span> <span class="nx">NavController</span><span class="p">,</span>
+    <span class="k">public</span> <span class="nx">navParams</span><span class="err">:</span> <span class="nx">NavParams</span>
+  <span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">tab1</span> <span class="o">=</span> <span class="nx">HomePage</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">tab2</span> <span class="o">=</span> <span class="nx">ContactPage</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">ionViewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'ionViewDidLoad TabsPage'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>don’t forget to import the pages:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HomePage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../home/home'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ContactPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../contact/contact'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p><strong>8.</strong> Great! now we have to understand how the tabs works. the tab page that we created will be our rootPage and the tab will manage all the content that in that case is the HomePage and the ContactPage. So lets go to the app.component.ts, import the tabs and change the value of the rootPage:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">TabsPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../pages/tabs/tabs'</span><span class="p">;</span>
+</code></pre>
+</div>
+<p><br /></p>
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="nx">rootPage</span> <span class="o">=</span> <span class="nx">TabsPage</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p><strong>9.</strong> Perfect! we’re almost done :D now we just need to add the pages that we have created in the app.module.ts:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">TabsPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../pages/tabs/tabs'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ContactPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../pages/contact/contact'</span><span class="p">;</span>
+</code></pre>
+</div>
+<p><br /></p>
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="nx">declarations</span><span class="err">:</span> <span class="p">[</span>
+  <span class="nx">MyApp</span><span class="p">,</span>
+  <span class="nx">HomePage</span><span class="p">,</span>
+  <span class="nx">TabsPage</span><span class="p">,</span>
+  <span class="nx">ContactPage</span>
+<span class="p">]</span>
+</code></pre>
+</div>
+<p><br /></p>
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="nx">entryComponents</span><span class="err">:</span> <span class="p">[</span>
+  <span class="nx">MyApp</span><span class="p">,</span>
+  <span class="nx">HomePage</span><span class="p">,</span>
+  <span class="nx">TabsPage</span><span class="p">,</span>
+  <span class="nx">ContactPage</span>
+<span class="p">]</span>
+</code></pre>
+</div>
+
+<p><strong>10.</strong> Done! in this simples steps you could create a menu and a tab in the same project from the beginning :D run the server and try it!</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo ionic serve
+</code></pre>
+</div>
+
+<p><strong>11.</strong> BONUS! you can customize this in different ways, for example you can set how the tab will be shows in the app, just changing some settings in the app.module.ts:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="nx">imports</span><span class="err">:</span> <span class="p">[</span>
+  <span class="nx">IonicModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">MyApp</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">platforms</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">android</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">tabsPlacement</span><span class="p">:</span> <span class="s1">'top'</span>
+      <span class="p">},</span>
+      <span class="na">ios</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">tabsPlacement</span><span class="p">:</span> <span class="s1">'bottom'</span>
+      <span class="p">},</span>
+      <span class="na">windows</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">tabsPlacement</span><span class="p">:</span> <span class="s1">'top'</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">]</span>
+</code></pre>
+</div>
+
+<p>there’s set that in ios the tab will be shown in the bottom.</p>
+
+<p>I hope you guys liked this tutorial, if you want to download all the project, just go to this link:</p>
+
+<p><a href="https://github.com/mopitz199/TabMenuProject">https://github.com/mopitz199/TabMenuProject</a></p>
+
+    </div>
+
+    <footer class="post-footer">
+        <div class="share">Share
+            <ul class="social-networks">
+                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Add a tab and a menu in the same Ionic 2 project&p[summary]=Hello everyone in this article I’ll show you how to create a blank Ionic 2 project and add the tabs + menu tools at the same time and how...&p[url]=/add-a-tab-and-a-menu-in-the-same-ionic-2-project.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
+                <li class="share-twitter"><a href="http://twitter.com/share?url=/add-a-tab-and-a-menu-in-the-same-ionic-2-project.html&text=Hello everyone in this article I’ll show you how to create a blank Ionic 2 project and add the tabs + menu tools at the same time and how...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
+            </ul>
+        </div>
+        
+        <div class="tags">
+            <ul>
+                
+            </ul>
+        </div>
+        
+    </footer>
+</article>
+
+
+<aside class="comments" role="complementary">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = '/add-a-tab-and-a-menu-in-the-same-ionic-2-project.html';
+            this.page.identifier = '2/11/2017';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');
+
+            s.src = '//your_disqus_site.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+</aside>
+
+            </main>
+        </div>
+
+        <script src="/assets/js/jquery-1.12.2.min.js"></script>
+<script src="/assets/js/backtotop.js"></script>
+<script src="/assets/js/lunr.min.js"></script>
+<script src="/assets/js/lunr-feed.js"></script>
+<script src="/assets/js/jquery.fitvids.js"></script>
+<script src="/assets/js/svg4everybody.min.js"></script>
+<script src="/assets/js/scripts.js"></script>
+
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-XXXXXXX-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    </body>
+</html>

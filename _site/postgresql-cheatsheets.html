@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PostgreSQL CheatSheets | Maximiliano Opitz Turra &mdash; Software Engineer </title>
+    <meta property="og:title" content="PostgreSQL CheatSheets | Maximiliano Opitz Turra &mdash; Software Engineer " />
+    <meta name="twitter:title" content="PostgreSQL CheatSheets | Maximiliano Opitz Turra &mdash; Software Engineer " />
+
+    <meta name="description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.">
+    <meta name="description" property="og:description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks." />
+    <meta name="twitter:description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <meta name="twitter:site" content="@your_handler" />
+    
+    <meta property="og:url" content="/postgresql-cheatsheets.html" />
+
+    <meta property="og:image" content="" />
+    <meta name="twitter:image" content="" />
+
+    <meta name="author" content="Maximiliano Opitz Turra" />
+
+    <meta name="copyright" content="Copyright by Maximiliano Opitz Turra. All Rights Reserved." />
+
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v15/CWB0XYA8bzo0kSThX0UTuA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local('Roboto-Black'), url(https://fonts.gstatic.com/s/roboto/v15/mnpfi9pxYH-Go5UiibESIltXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 300;
+            src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://fonts.gstatic.com/s/roboto/v15/7m8l7TlFO-S3VkhHuR0at44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 400;
+            src: local('Roboto Italic'), local('Roboto-Italic'), url(https://fonts.gstatic.com/s/roboto/v15/vPcynSL0qHq_6dX7lKVByfesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 700;
+            src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(https://fonts.gstatic.com/s/roboto/v15/t6Nd4cfPRhZP44Q5QAjcC44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 900;
+            src: local('Roboto Black Italic'), local('Roboto-BlackItalic'), url(https://fonts.gstatic.com/s/roboto/v15/bmC0pGMXrhphrZJmniIZpY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+    </style>
+    
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <link rel="canonical" href="/postgresql-cheatsheets.html">
+
+    <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
+</head>
+
+    <body>
+        <div class="wrapper clear">
+            <aside class="user-profile fixed" role="complementary">
+    <a href=""><img class="avatar" src="/assets/perfil.jpg" /></a>
+    <strong class="my-name">Maximiliano Opitz Turra</strong>
+    <span class="my-job-title">Software Engineer</span>
+
+    
+        
+        <div class="mainmenu">
+            <a href="/" >Home</a>
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a href="/portfolio/" >Portfolio</a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </div>
+        
+    
+
+    <p class="about-me">I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.</p>
+
+    <ul>
+        <li><a href="https://www.facebook.com/mturra"><svg title="facebook" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></li><li><a href="https://www.linkedin.com/in/mopitz199"><svg title="linkedin" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#linkedin-icon"></use></svg></a></li><li><a href="https://github.com/mopitz199"><svg title="github" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#github-icon"></use></svg></a></li><li><a href="https://www.youtube.com/channel/UC4vxgNgkH9san9rcuEMdDAA"><svg title="youtube" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#youtube-icon"></use></svg></a></li>
+
+        
+            <li><a href="mailto:mopitz199@gmail.com"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#email-icon"></use></svg></a></li>
+        
+
+        
+    </ul>
+</aside>
+
+
+            <main class="the-content" role="main">
+                <div class="search" role="search">
+    <div>
+        <div class="show-results-count">0 Results</div>
+        <div class="search-holder clear">
+            <input type="text" id="search-input" placeholder="search for...">
+        </div>
+    </div>
+    <ul id="results-container" class="results-container"></ul>
+</div>
+
+
+                <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <ul class="clear">
+            <li><time datetime="2017-02-11T00:00:00-03:00" itemprop="datePublished">11 Feb, 2017</time></li>
+            
+        </ul>
+        <h2 itemprop="name headline">PostgreSQL CheatSheets</h2>
+    </header>
+
+    <div class="post-content">
+        <p><strong>Service</strong> =&gt; <strong>Instance</strong>: Response a una direccion IP y puerto especifico. tiene sus propios permisos de acceso,
+mantiene aisalada su informacion o datos.</p>
+
+<hr />
+
+<p><strong>Database</strong> =&gt; Es una organizacion logica de datos y codigo. Un Service(<em>Instance</em>) puede contener una o mas Databases</p>
+
+<hr />
+
+<!--more-->
+
+<p><strong>Schema</strong> =&gt; Es una organizacion logica de datos y codigo, un Database puede contener uno o mas Schemas</p>
+
+<p>Ej: podemos tener una tabla llamada <em>usuario</em>, esta tabla la podemos crear en dos Schemas distinos y quedaria algo asi:</p>
+
+<ul>
+  <li>schema1_usuario</li>
+  <li>schema2_usuario</li>
+</ul>
+
+<p>De esta forma, tendremos dos tablas “<em>iguales</em>” pero creadas en dos Schemas distintos con sus propios datos. Es posible comunicar tablas de distintos Schemas.</p>
+
+<hr />
+
+<p><strong>Tablespaces</strong> =&gt; Es un archivo fisico.</p>
+
+<hr />
+
+<p><strong>Catalog</strong> =&gt; PostgreSQL, contiene informacion de los objetos que tenemos en nuestra base de datos.</p>
+
+<p>Al ejecutar <em>psql</em> estoy ingresando a una Instance, puedo especificarle IP, puerto y otras cosas. Por defecto va a la de localhost.</p>
+
+<hr />
+
+<p><strong>Archivos de configuracion</strong> =&gt;</p>
+
+<ul>
+  <li>postgresql.conf (contiene configuracion propia de la Instance, como su ip, puerto, numero de conexiones, etc…)</li>
+  <li>pg_hba.conf (contiene los permisos de los usuarios que podran acceder al servidor PostgreSQL)</li>
+  <li>trust: no pide password</li>
+  <li>password: pide password, pero la envia en texto plano</li>
+  <li>md5: pide password, pero la envia encriptada en hash md5</li>
+  <li>iden: mapea el usuario que se quiere conectar con un usuario de PostgreSQL y ve si calza, e ingresa como el usuario de PostgreSQL</li>
+  <li>pg_ident.conf (contiene el mapaeo de qye usuario se mapeara con un usuario de PostgreSQL)</li>
+</ul>
+
+<p>-Comando para encontrar esos archivos:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span> <span class="n">setting</span> <span class="k">FROM</span> <span class="n">pg_settings</span> <span class="k">WHERE</span> <span class="n">category</span><span class="o">=</span><span class="s1">'File Locations'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para ver algunos settings del archivo <em>postgresql.conf</em>:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">setting</span><span class="p">,</span> <span class="n">boot_val</span><span class="p">,</span> <span class="n">reset_val</span> <span class="k">FROM</span> <span class="n">pg_settings</span> <span class="k">WHERE</span> <span class="n">name</span> <span class="k">in</span> <span class="p">[</span><span class="s1">'listen_addresses'</span><span class="p">,</span> <span class="s1">'max_connections'</span><span class="p">,</span> <span class="s1">'shared_buffers'</span><span class="p">,</span> <span class="s1">'efective_cache_size'</span><span class="p">,</span> <span class="s1">'work_mem'</span><span class="p">]</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">context</span><span class="p">,</span> <span class="n">name</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para setear un campo del archivo <em>postgresql.conf</em>:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="n">ALERT</span> <span class="k">SYSTEM</span> <span class="k">set</span> <span class="n">work_mem</span> <span class="o">=</span> <span class="mi">8192</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="n">pg_reload_conf</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<p>Este comando creara un archivo llamado <em>postgresql.auto.conf</em> que contrandra todos los cambios de valores, y cuando se reinicie el servidor PostgreSQL, se cargara el archivo <em>postgresql.conf</em> y luego el <em>postgres.auto.conf</em> para aplicar todos los cambios que se han hecho y de esta forma no tener que setear los valores cada vez que se quiera reiniciar el servidor PostgreSQL</p>
+
+<p>-Comando para ver quien esta conectado a nuestra base de datos y cual fue su ultima consulta ejecutada(o ejecutandose):</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">pg_stat_activity</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para cancelar la consulta que se esta ejecutando a traves de un cierto usuario:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">pg_cancel_backend</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>-Comando para desconectar un cierto usuario conectado:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">pg_terminate_backend</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="roles">Roles</h3>
+
+<p><strong>Roles</strong>: es un usuario de una Instance de PostgreSQL</p>
+
+<ul>
+  <li>roles de sesion: usarios normales que pueden ingresar a la Instance con su password</li>
+  <li>roles de grupo: grupo de usuarios con ciertos permisos, para darle permisos a los roles de sesion, usaremos los roles de grupo</li>
+</ul>
+
+<p>-Comando para crear un rol de sesion:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">ROLE</span> <span class="n">john</span> <span class="n">LOGIN</span> <span class="n">PASSWORD</span> <span class="s1">'john123'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para ver los roles y sus permisos que tenemos en nuetsra Instance:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">pg_roles</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para eliminar un role:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">DROP</span> <span class="k">ROLE</span> <span class="n">john</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para crear un rol de sesion con md5 password(manera correcta):</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">ROLE</span> <span class="n">john</span> <span class="n">LOGIN</span> <span class="k">ENCRYPTED</span> <span class="n">PASSWORD</span> <span class="s1">'john123'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para crear un rol de sesion que exista hasta una cierta fecha:</p>
+
+<ul>
+  <li>‘2015-2-20 00:00’</li>
+  <li>‘infinity’</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">ROLE</span> <span class="n">john</span> <span class="n">LOGIN</span> <span class="k">ENCRYPTED</span> <span class="n">PASSWORD</span> <span class="s1">'john123'</span> <span class="k">VALID</span> <span class="k">UNTIL</span> <span class="s1">'2015-2-20 00:00'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para crear un rol con ciertos permisos:</p>
+
+<ul>
+  <li>CREATEDB</li>
+  <li>SUPERUSER</li>
+  <li>CREATEROLES</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">ROLE</span> <span class="n">john</span> <span class="n">LOGIN</span> <span class="k">ENCRYPTED</span> <span class="n">PASSWORD</span> <span class="s1">'john123'</span> <span class="k">CREATEDB</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para crear rol de grupo:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">ROLE</span> <span class="n">platzi</span> <span class="n">INHERIT</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p><em>El rol puede ser de sesion o de grupo</em></p>
+
+<p>-Comando para agregar un rol de sesion a un rol de grupo:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">GRANT</span> <span class="n">john</span> <span class="k">to</span> <span class="n">platzi</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="database">Database</h3>
+
+<p>-Comando para crear una base de datos:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">platzi_db</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para eliminar una base de datos:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">DROP</span> <span class="k">DATABASE</span> <span class="n">platzi_db</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para asignarle una plantilla a una base de datos al momento de crearla:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">platzi_db</span> <span class="k">TEMPLATE</span> <span class="n">template1</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para restaurar una base de datos a partir de un archivo:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>pg_restore -d db_name restore_file
+</code></pre>
+</div>
+
+<p><strong>Templates</strong> =&gt; Son configuraciones que estan almacenadas, y que al momento de crear una base de datos con esa plantilla, esa base de datos tendra todas esas configuracion, que pueden ser:</p>
+
+<ul>
+  <li>extensiones(postGIS, etc..)</li>
+  <li>tablas por defecto</li>
+  <li>roles para esa base de datos</li>
+  <li>etc..</li>
+</ul>
+
+<p>-Comando para crear un template a partir de una base de datos:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">UPDATE</span> <span class="n">pg_database</span> <span class="k">SET</span> <span class="n">datistemplate</span> <span class="o">=</span> <span class="k">true</span> <span class="k">WHERE</span> <span class="n">datname</span> <span class="o">=</span> <span class="s1">'platzi_db'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p><em>Ya no se podra usar esa base de datos, ya que ahora es un template</em></p>
+
+<p>Comando para cambiarme a de una base de datos a otra:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="err">\</span><span class="k">c</span> <span class="n">platzi_db</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="schemas">Schemas</h3>
+
+<p>La idea de un Schema es poder tener las tablas agrupas en una misma base de datos, de esta forma si tengo varias tablas relacionadas al manejo de usuarios, las puedo agrupar en un Schema, luego si tengo tablas relacionadas con un inventario, las puedo agrupar en otros Schema, y de esta forma tener un orden en la misma base de datos cuando estas crecen mucho.</p>
+
+<p>-Comando para crear un Schema (debo estar adentro de una base de datos):</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">SCHEMA</span> <span class="n">schema_inventario</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="privileges">Privileges</h3>
+
+<p>-Comando para dar privilegios a una tabla en particular de un schema a un rol:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">ON</span> <span class="k">ALL</span> <span class="n">TABLES</span> <span class="k">IN</span> <span class="k">SCHEMA</span> <span class="n">schema_inventario</span> <span class="k">TO</span> <span class="n">platzi</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>-Comando para ejecutar <em>“SQL”</em> directamente desde la terminal, en este caso en particular se le aplican provilegios a una base de datos.</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="n">psql</span> <span class="n">database_name</span> <span class="o">-</span><span class="k">c</span> <span class="nv">"GRANT ALL ON ALL TABLES IN SCHEMA public to user;"</span>
+</code></pre>
+</div>
+
+<p><a href="https://www.postgresql.org/docs/9.6/static/sql-grant.html">Listado de privilegios</a> y de como sar privilegios a distintos tipos de objetos(tables, schemas, databases, etc…)</p>
+
+<hr />
+
+<h3 id="data-types">Data Types</h3>
+
+<p>SEQUENCE: Es un valor entero incremental que no se puede cambiar. Se usa como id de tabla ya que por cada fila, ese valor incrementara.</p>
+
+<p>VARCHAR: Sirve para guardar cadenas de texto variables, ya que si el maximo es 255, y guardamos una cadena de 10, NO rellenara el resto con espacio, y de esa forma no gastaremos espacio innecesario.</p>
+
+<p>ARRAY: Guarda un arreglo literalmente para su uso como arreglo en un formato de este tipo: <em>Ej: {1,4,8,9}</em></p>
+
+<hr />
+
+<h3 id="functions">Functions</h3>
+
+<p>-lpad: rellena con un caracter en especial:</p>
+
+<ul>
+  <li>lpad(‘ab’, 3 ,0) =&gt; 0ab</li>
+</ul>
+
+<p>-repeat: repite un string:</p>
+
+<ul>
+  <li>repeat(‘-‘, 4) =&gt; —-</li>
+</ul>
+
+<p>-trim: quita los espacios de la derecha e izuqierda de un string</p>
+
+<ul>
+  <li>trim(‘   tr    ‘) =&gt; tr</li>
+</ul>
+
+<p>-split_part: separa un string por un caracter, los guarda en un arreglo y luego podemos obetner cualquiera de esos:</p>
+
+<ul>
+  <li>split_part(‘312-4657-2947’, ‘-‘, 2) =&gt; 4657</li>
+</ul>
+
+<p>-string_to_array: separa un string por un caracter(devuelve un arreglo)</p>
+
+<ul>
+  <li>string_to_array(‘aaa.bbb.ccc’, ‘.’) =&gt; {aaa,bbb,ccc}</li>
+</ul>
+
+    </div>
+
+    <footer class="post-footer">
+        <div class="share">Share
+            <ul class="social-networks">
+                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=PostgreSQL CheatSheets&p[summary]=Service =&gt; Instance: Response a una direccion IP y puerto especifico. tiene sus propios permisos de acceso,
+mantiene aisalada su infor...&p[url]=/postgresql-cheatsheets.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
+                <li class="share-twitter"><a href="http://twitter.com/share?url=/postgresql-cheatsheets.html&text=Service =&gt; Instance: Response a una direccion IP y puerto especifico. tiene sus propios permisos de acceso,
+mantiene aisalada su infor...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
+            </ul>
+        </div>
+        
+        <div class="tags">
+            <ul>
+                
+            </ul>
+        </div>
+        
+    </footer>
+</article>
+
+
+<aside class="comments" role="complementary">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = '/postgresql-cheatsheets.html';
+            this.page.identifier = '2/11/2017';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');
+
+            s.src = '//your_disqus_site.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+</aside>
+
+            </main>
+        </div>
+
+        <script src="/assets/js/jquery-1.12.2.min.js"></script>
+<script src="/assets/js/backtotop.js"></script>
+<script src="/assets/js/lunr.min.js"></script>
+<script src="/assets/js/lunr-feed.js"></script>
+<script src="/assets/js/jquery.fitvids.js"></script>
+<script src="/assets/js/svg4everybody.min.js"></script>
+<script src="/assets/js/scripts.js"></script>
+
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-XXXXXXX-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    </body>
+</html>

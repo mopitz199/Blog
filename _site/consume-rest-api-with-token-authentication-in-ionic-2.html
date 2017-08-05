@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Consume REST Api with Token Authentication in Ionic 2 | Maximiliano Opitz Turra &mdash; Software Engineer </title>
+    <meta property="og:title" content="Consume REST Api with Token Authentication in Ionic 2 | Maximiliano Opitz Turra &mdash; Software Engineer " />
+    <meta name="twitter:title" content="Consume REST Api with Token Authentication in Ionic 2 | Maximiliano Opitz Turra &mdash; Software Engineer " />
+
+    <meta name="description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.">
+    <meta name="description" property="og:description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks." />
+    <meta name="twitter:description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <meta name="twitter:site" content="@your_handler" />
+    
+    <meta property="og:url" content="/consume-rest-api-with-token-authentication-in-ionic-2.html" />
+
+    <meta property="og:image" content="" />
+    <meta name="twitter:image" content="" />
+
+    <meta name="author" content="Maximiliano Opitz Turra" />
+
+    <meta name="copyright" content="Copyright by Maximiliano Opitz Turra. All Rights Reserved." />
+
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v15/CWB0XYA8bzo0kSThX0UTuA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local('Roboto-Black'), url(https://fonts.gstatic.com/s/roboto/v15/mnpfi9pxYH-Go5UiibESIltXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 300;
+            src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://fonts.gstatic.com/s/roboto/v15/7m8l7TlFO-S3VkhHuR0at44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 400;
+            src: local('Roboto Italic'), local('Roboto-Italic'), url(https://fonts.gstatic.com/s/roboto/v15/vPcynSL0qHq_6dX7lKVByfesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 700;
+            src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(https://fonts.gstatic.com/s/roboto/v15/t6Nd4cfPRhZP44Q5QAjcC44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 900;
+            src: local('Roboto Black Italic'), local('Roboto-BlackItalic'), url(https://fonts.gstatic.com/s/roboto/v15/bmC0pGMXrhphrZJmniIZpY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+    </style>
+    
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <link rel="canonical" href="/consume-rest-api-with-token-authentication-in-ionic-2.html">
+
+    <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
+</head>
+
+    <body>
+        <div class="wrapper clear">
+            <aside class="user-profile fixed" role="complementary">
+    <a href=""><img class="avatar" src="/assets/perfil.jpg" /></a>
+    <strong class="my-name">Maximiliano Opitz Turra</strong>
+    <span class="my-job-title">Software Engineer</span>
+
+    
+        
+        <div class="mainmenu">
+            <a href="/" >Home</a>
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a href="/portfolio/" >Portfolio</a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </div>
+        
+    
+
+    <p class="about-me">I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.</p>
+
+    <ul>
+        <li><a href="https://www.facebook.com/mturra"><svg title="facebook" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></li><li><a href="https://www.linkedin.com/in/mopitz199"><svg title="linkedin" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#linkedin-icon"></use></svg></a></li><li><a href="https://github.com/mopitz199"><svg title="github" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#github-icon"></use></svg></a></li><li><a href="https://www.youtube.com/channel/UC4vxgNgkH9san9rcuEMdDAA"><svg title="youtube" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#youtube-icon"></use></svg></a></li>
+
+        
+            <li><a href="mailto:mopitz199@gmail.com"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#email-icon"></use></svg></a></li>
+        
+
+        
+    </ul>
+</aside>
+
+
+            <main class="the-content" role="main">
+                <div class="search" role="search">
+    <div>
+        <div class="show-results-count">0 Results</div>
+        <div class="search-holder clear">
+            <input type="text" id="search-input" placeholder="search for...">
+        </div>
+    </div>
+    <ul id="results-container" class="results-container"></ul>
+</div>
+
+
+                <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <ul class="clear">
+            <li><time datetime="2017-02-11T00:00:00-03:00" itemprop="datePublished">11 Feb, 2017</time></li>
+            
+        </ul>
+        <h2 itemprop="name headline">Consume REST Api with Token Authentication in Ionic 2</h2>
+    </header>
+
+    <div class="post-content">
+        <p>Hello everyone, in this article I would like to show you how to use API REST with Token Authentication in Ionic 2 in simple steps :D</p>
+
+<!--more-->
+
+<p><strong>1.</strong> Let’s create an empty project:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo ionic start HttpServiceProject blank --v2
+</code></pre>
+</div>
+
+<p><strong>2.</strong> Now we have to create a provider that will be an http service:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo ionic g provider HttpService
+</code></pre>
+</div>
+
+<p>This service will manage the token</p>
+
+<p><strong>3.</strong> Edit the http-service.ts that we just created:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Http</span><span class="p">,</span> <span class="nx">Headers</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/http'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'rxjs/add/operator/map'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">HttpService</span> <span class="p">{</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">_http</span><span class="err">:</span> <span class="nx">Http</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hello HttpService Provider'</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">createAuthorizationHeader</span><span class="p">(</span><span class="nx">headers</span><span class="err">:</span> <span class="nx">Headers</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">headers</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">);</span>
+    <span class="nx">headers</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'Authorization'</span><span class="p">,</span> <span class="s1">'Token '</span> <span class="o">+</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">"auth_token"</span><span class="p">));</span>
+    <span class="k">return</span> <span class="nx">headers</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">createAuthorizationHeader</span><span class="p">(</span><span class="k">new</span> <span class="nx">Headers</span><span class="p">());</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span><span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">}).</span><span class="nx">map</span><span class="p">(</span>
+      <span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span> <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">createAuthorizationHeader</span><span class="p">(</span><span class="k">new</span> <span class="nx">Headers</span><span class="p">());</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_http</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{</span><span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">}).</span><span class="nx">map</span><span class="p">(</span>
+      <span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span> <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>We need to explain some things, we created to methods( get and post ), an each method will make the according call, just with something different, that will be the token that they will set in the header before the call. The key is in the “createAuthorizationHeader” method that is in charge to get the token, and as you can see we are getting the token form the localStorage, that’s means that we should storage the token before the call, for this example you can create a fake token.</p>
+
+<p><strong>4.</strong> In the home.ts we have to use the service:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../../providers/http-service'</span><span class="p">;</span>
+</code></pre>
+</div>
+<p><br /></p>
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="s1">'page-home'</span><span class="p">,</span>
+  <span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'home.html'</span><span class="p">,</span>
+  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span><span class="nx">HttpService</span><span class="p">]</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+<p><br /></p>
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="kd">constructor</span><span class="p">(</span>
+    <span class="k">public</span> <span class="nx">navCtrl</span><span class="err">:</span> <span class="nx">NavController</span><span class="p">,</span>
+    <span class="k">private</span> <span class="nx">_httpService</span><span class="err">:</span> <span class="nx">HttpService</span>
+  <span class="p">)</span> <span class="p">{</span>
+      <span class="nx">_httpService</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"http://jsonplaceholder.typicode.com/posts"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span>
+          <span class="nx">data</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">posts</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+          <span class="p">},</span>
+          <span class="nx">error</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+          <span class="p">}</span>
+        <span class="p">)</span>
+  <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>As you can see, we are using an url example, that in your case will be your service, in this case we are requesting by posts and now we have to show the results in our home template.</p>
+
+<p><strong>5.</strong> In our home.html insert a list like this:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>
+<span class="nt">&lt;ion-list&gt;</span>
+  <span class="nt">&lt;ion-item</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let post of posts; let i = index"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h2&gt;</span>{{ post.title }}<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>{{ post.id }}<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span>{{ post.body }}<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/ion-item&gt;</span>
+<span class="nt">&lt;/ion-list&gt;</span>
+
+</code></pre>
+</div>
+
+<p>This list will show all the posts that we requested.</p>
+
+<p><strong>6.</strong> If you check the headers in the request you will see the token if you created a fake one:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="nx">createAuthorizationHeader</span><span class="p">(</span><span class="nx">headers</span><span class="err">:</span> <span class="nx">Headers</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">headers</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">);</span>
+  <span class="c1">// Fake token</span>
+  <span class="nx">headers</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'Authorization'</span><span class="p">,</span> <span class="s1">'Token '</span> <span class="o">+</span> <span class="s1">'cds6ds7cds5csdcds'</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">headers</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><img src="/assets/request-token.png" alt="_config.yml" /></p>
+
+<p><strong>7.</strong> In that way you created a service that is available to consume external services using a token authentication if is necessary :D. If you want to download the project just go to this link:</p>
+
+<p><a href="https://github.com/mopitz199/HttpServiceWithTokenProject">https://github.com/mopitz199/HttpServiceWithTokenProject</a></p>
+
+    </div>
+
+    <footer class="post-footer">
+        <div class="share">Share
+            <ul class="social-networks">
+                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Consume REST Api with Token Authentication in Ionic 2&p[summary]=Hello everyone, in this article I would like to show you how to use API REST with Token Authentication in Ionic 2 in simple steps :D
+
+
+
+1...&p[url]=/consume-rest-api-with-token-authentication-in-ionic-2.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
+                <li class="share-twitter"><a href="http://twitter.com/share?url=/consume-rest-api-with-token-authentication-in-ionic-2.html&text=Hello everyone, in this article I would like to show you how to use API REST with Token Authentication in Ionic 2 in simple steps :D
+
+
+
+1...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
+            </ul>
+        </div>
+        
+        <div class="tags">
+            <ul>
+                
+            </ul>
+        </div>
+        
+    </footer>
+</article>
+
+
+<aside class="comments" role="complementary">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = '/consume-rest-api-with-token-authentication-in-ionic-2.html';
+            this.page.identifier = '2/11/2017';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');
+
+            s.src = '//your_disqus_site.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+</aside>
+
+            </main>
+        </div>
+
+        <script src="/assets/js/jquery-1.12.2.min.js"></script>
+<script src="/assets/js/backtotop.js"></script>
+<script src="/assets/js/lunr.min.js"></script>
+<script src="/assets/js/lunr-feed.js"></script>
+<script src="/assets/js/jquery.fitvids.js"></script>
+<script src="/assets/js/svg4everybody.min.js"></script>
+<script src="/assets/js/scripts.js"></script>
+
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-XXXXXXX-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    </body>
+</html>

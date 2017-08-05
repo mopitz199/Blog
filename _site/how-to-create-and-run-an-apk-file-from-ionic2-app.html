@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Sample Data | Maximiliano Opitz Turra &mdash; Software Engineer </title>
-    <meta property="og:title" content="Sample Data | Maximiliano Opitz Turra &mdash; Software Engineer " />
-    <meta name="twitter:title" content="Sample Data | Maximiliano Opitz Turra &mdash; Software Engineer " />
+    <title>How to create and run an apk file from Ionic2 app | Maximiliano Opitz Turra &mdash; Software Engineer </title>
+    <meta property="og:title" content="How to create and run an apk file from Ionic2 app | Maximiliano Opitz Turra &mdash; Software Engineer " />
+    <meta name="twitter:title" content="How to create and run an apk file from Ionic2 app | Maximiliano Opitz Turra &mdash; Software Engineer " />
 
     <meta name="description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.">
     <meta name="description" property="og:description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks." />
@@ -17,7 +17,7 @@
     
     <meta name="twitter:site" content="@your_handler" />
     
-    <meta property="og:url" content="/docs/sample-data.html" />
+    <meta property="og:url" content="/how-to-create-and-run-an-apk-file-from-ionic2-app.html" />
 
     <meta property="og:image" content="" />
     <meta name="twitter:image" content="" />
@@ -96,7 +96,7 @@
     
     <link rel="stylesheet" href="/assets/css/main.css">
 
-    <link rel="canonical" href="/docs/sample-data.html">
+    <link rel="canonical" href="/how-to-create-and-run-an-apk-file-from-ionic2-app.html">
 
     <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
 </head>
@@ -174,179 +174,146 @@
                 <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
     <header class="post-header">
         <ul class="clear">
-            <li><time datetime="2016-03-11T23:56:00-03:00" itemprop="datePublished">11 Mar, 2016</time></li>
-            
-                
-                <li class="cats">
-                    
-                        <a href="/categories/docs/">docs</a>
-                    
-                </li>
-                
+            <li><time datetime="2017-02-09T00:00:00-03:00" itemprop="datePublished">9 Feb, 2017</time></li>
             
         </ul>
-        <h2 itemprop="name headline">Sample Data</h2>
+        <h2 itemprop="name headline">How to create and run an apk file from Ionic2 app</h2>
     </header>
 
     <div class="post-content">
-        <p>Markdown (or Textile), Liquid, HTML &amp; CSS go in. Static sites come out ready for deployment.</p>
+        <p>Hi everyone, in this tutorial I’ll show you how to create an apk file (for android) from an Ionic2 app in simple steps, let’s start!</p>
 
-<h4 id="headings">Headings</h4>
+<!--more-->
 
-<h1 id="heading-1">Heading 1</h1>
-
-<h2 id="heading-2">Heading 2</h2>
-
-<h3 id="heading-3">Heading 3</h3>
-
-<h4 id="heading-4">Heading 4</h4>
-
-<h5 id="heading-5">Heading 5</h5>
-
-<h6 id="heading-6">Heading 6</h6>
-
-<h4 id="blockquote">Blockquote</h4>
-
-<blockquote>
-  <p>No more databases, comment moderation, or pesky updates to install—just your content.</p>
-</blockquote>
-
-<h4 id="unordered-list">Unordered List</h4>
+<p><strong>1.</strong> First we will need some requirements, you need to:</p>
 
 <ul>
-  <li>Jekyll</li>
-  <li>Ruby</li>
-  <li>Markdown</li>
-  <li>Liquid</li>
+  <li>Install Android Studio or just the SDK(to build the app)</li>
+  <li>Install the some API’s (16,24, and one of the last once) from the SDK Manager</li>
+  <li>Install ADB(to install our app in our emulator</li>
+  <li>create an emulator with the AVD Manager(to run the app)</li>
 </ul>
 
-<h4 id="ordered-list">Ordered List</h4>
+<p><strong>2.</strong> Create an empty project:</p>
 
-<ol>
-  <li>Jekyll</li>
-  <li>Ruby</li>
-  <li>Markdown</li>
-  <li>Liquid</li>
-</ol>
-
-<h4 id="link">Link</h4>
-
-<p>This is <a href="http://example.com/" title="Title">an example</a> inline link.</p>
-
-<h4 id="paragraph-w-strong-em-etc">Paragraph w/ strong, em, etc.</h4>
-
-<p>These are just a few of the <em>available</em> <strong>configuration</strong> options. Many configuration options can <strike>either</strike> be specified as flags on the <abbr title="Command Line Tool">command line</abbr>, or alternatively (and more commonly) they can be specified in a _config.yml file at the root of the source directory. Jekyll will <a href="http://joro.me/" target="_blank">automatically use</a> the options from this file when run. For example, if you place the following lines in your _config.yml file.</p>
-
-<h4 id="image">Image</h4>
-<figure class="aligncenter">
-	<img src="https://images.unsplash.com/photo-1449452198679-05c7fd30f416?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;s=73181f1c6d56b933b30de2bfe21fdf3b" />
-	<figcaption>Photo by <a href="https://unsplash.com/rmaedavis" target="_blank">Rachel Davis</a>.</figcaption>
-</figure>
-
-<h4 id="video">Video</h4>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iWowJBRMtpc" frameborder="0" allowfullscreen=""></iframe>
-
-<h4 id="default-code-block">Default Code Block</h4>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>This is code blog.
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo ionic start BlankProject blank --v2
 </code></pre>
 </div>
 
-<h4 id="styled-code-block">Styled Code Block</h4>
+<p><strong>3.</strong> We need to create the android platform:</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18</pre></td><td class="code"><pre><span class="c1">#!/usr/bin/ruby
-</span>
-<span class="vg">$LOAD_PATH</span> <span class="o">&lt;&lt;</span> <span class="s1">'.'</span>
-<span class="nb">require</span> <span class="s2">"support"</span>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo ionic platform add android
+</code></pre>
+</div>
 
-<span class="k">class</span> <span class="nc">Decade</span>
-<span class="kp">include</span> <span class="no">Week</span>
-   <span class="n">no_of_yrs</span><span class="o">=</span><span class="mi">10</span>
-   <span class="k">def</span> <span class="nf">no_of_months</span>
-      <span class="nb">puts</span> <span class="no">Week</span><span class="o">::</span><span class="no">FIRST_DAY</span>
-      <span class="n">number</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mi">12</span>
-      <span class="nb">puts</span> <span class="n">number</span>
-   <span class="k">end</span>
-<span class="k">end</span>
-<span class="n">d1</span><span class="o">=</span><span class="no">Decade</span><span class="p">.</span><span class="nf">new</span>
-<span class="nb">puts</span> <span class="no">Week</span><span class="o">::</span><span class="no">FIRST_DAY</span>
-<span class="no">Week</span><span class="p">.</span><span class="nf">weeks_in_month</span>
-<span class="no">Week</span><span class="p">.</span><span class="nf">weeks_in_year</span>
-<span class="n">d1</span><span class="p">.</span><span class="nf">no_of_months</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<p>If we get an error like this: “Error: Failed to find ‘ANDROID_HOME’ environment variable. Try setting setting it manually.” is because we need to set our ANDROID_HOME variable. A quick solution would be put something like this:</p>
 
-<h4 id="definition-lists">Definition Lists</h4>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo <span class="nv">ANDROID_HOME</span><span class="o">=</span><span class="s2">"/home/maximiliano/Android/Sdk/"</span> ionic platform add android
+</code></pre>
+</div>
 
-<dl>
-    <dt>Definition Title</dt>
-    <dd>Definition Description</dd>
-</dl>
+<p>Where is your case you have to write <strong>YOUR</strong> path to the SDK.</p>
 
-<h4 id="paragraphs-w-aligned-images">Paragraphs w/ Aligned Images</h4>
+<p><strong>4.</strong> After that, we are going to use cordova to build our apk file:</p>
 
-<p>The Jekyll gem makes a jekyll executable available to you in your Terminal window. You can use this command in a number of ways.</p>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo cordova build --release android
+</code></pre>
+</div>
 
-<figure class="alignleft">
-	<img width="250" src="https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;s=3f9c78df0edb464244bbabb04d1797d8" />
-	<figcaption>Photo by <a href="https://unsplash.com/dustinlee" target="_blank">Dustin Lee</a>.</figcaption>
-</figure>
+<p>Again, if you haven’t setted up our ANDROID_HOME enviroment variable you can solve it writting this:</p>
 
-<p>This site aims to be a comprehensive guide to Jekyll. We’ll cover topics such as getting your site up and running, creating and managing your content, customizing the way your site works and looks, deploying to various environments, and give you some advice on participating in the future development of Jekyll itself.</p>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo <span class="nv">ANDROID_HOME</span><span class="o">=</span><span class="s2">"/home/maximiliano/Android/Sdk/"</span> cordova build --release android
+</code></pre>
+</div>
 
-<p>Jekyll is a simple, blog-aware, static site generator. It takes a template directory containing raw text files in various formats, runs it through a converter (like Markdown) and our Liquid renderer, and spits out a complete, ready-to-publish static website suitable for serving with your favorite web server. Jekyll also happens to be the engine behind GitHub Pages, which means you can use Jekyll to host your project’s page, blog, or website from GitHub’s servers for free.</p>
+<p><strong>5.</strong> Now let’s go to our apk file, in my case is in:</p>
 
-<figure class="alignright">
-	<img width="250" src="https://images.unsplash.com/photo-1442037025225-e1cffaa2dc23?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;s=7fe04b68b0cb123bf568c6951c14b177" />
-	<figcaption>Photo by <a href="https://unsplash.com/lobostudiohamburg" target="_blank">LoboStudio Hamburg</a>.</figcaption>
-</figure>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>platforms/android/build/outputs/apk/
+</code></pre>
+</div>
 
-<p>Throughout this guide there are a number of small-but-handy pieces of information that can make using Jekyll easier, more interesting, and less hazardous. Here’s what to look out for.</p>
+<p>You will see that your app has a name like this: “android-release-unsigned.apk”. That is because you need to sign your app before use it, so, let’s do it!</p>
 
-<p>If you come across anything along the way that we haven’t covered, or if you know of a tip you think others would find handy, please file an issue and we’ll see about including it in this guide.</p>
+<p><strong>6.</strong> To sign our app we need to create a key first:</p>
 
-<p>The front matter is where Jekyll starts to get really cool. Any file that contains a YAML front matter block will be processed by Jekyll as a special file. The front matter must be the first thing in the file and must take the form of valid YAML set between triple-dashed lines.</p>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+</code></pre>
+</div>
+
+<p>Where “my-release-key.keystore” will be the name that you key will have(you can put any name)</p>
+
+<p><strong>7.</strong> Now we will apply the key in our app:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore android-release-unsigned.apk alias_name
+</code></pre>
+</div>
+
+<p>Where “android-release-unsigned.apk” is the name of the apk that you created steps before</p>
+
+<p><strong>8.</strong> We are almost done, we’re going to optimize a little bit our app running this command:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo /home/maximiliano/Android/Sdk/build-tools/25.0.2/zipalign -v 4 android-release-unsigned.apk final.apk
+</code></pre>
+</div>
+
+<p>Where you have to write YOUR path to “zipalign” that is where your SDK is saved. then you have two names, the first one is your current app and the second one is the name that you optimize app will have(write any name, but don’t forget the apk extension)</p>
+
+<p><strong>9.</strong> Great! now we have our apk ready :D would you like to run it? Let’s do it! Go to the SDK tools:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="nb">cd</span> /home/maximiliano/Android/Sdk/tools/
+</code></pre>
+</div>
+
+<p>And run:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>./android avd
+</code></pre>
+</div>
+
+<p>Then, create an AVD(Android Virtual Device) with one of your API Level (16,24, etc…)
+Once it is created, run it, you will have something like this:</p>
+
+<p><img src="/assets/android_screen.png" alt="_config.yml" /></p>
+
+<p>So you are ready to install you apk in that AVD</p>
+
+<p><strong>10.</strong> Go where our app (final.apk) is and run:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>adb devices
+</code></pre>
+</div>
+
+<p>You should see something like this:</p>
+
+<p><img src="/assets/seleccion_device.png" alt="_config.yml" /></p>
+
+<p>That means that you have you emulator running and waitting for our app :D, now install it!</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>adb install final.apk
+</code></pre>
+</div>
+
+<p>You should see in the AVD the default cordova icon with our project name:</p>
+
+<p><img src="/assets/blank_project_icon.png" alt="_config.yml" /></p>
+
+<p>Come on! run it!!!</p>
 
     </div>
 
     <footer class="post-footer">
         <div class="share">Share
             <ul class="social-networks">
-                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Sample Data&p[summary]=Markdown (or Textile), Liquid, HTML &amp; CSS go in. Static sites come out ready for deployment.
+                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=How to create and run an apk file from Ionic2 app&p[summary]=Hi everyone, in this tutorial I’ll show you how to create an apk file (for android) from an Ionic2 app in simple steps, let’s start!
 
-Headings
 
-Heading 1
 
-Heading 2
+1...&p[url]=/how-to-create-and-run-an-apk-file-from-ionic2-app.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
+                <li class="share-twitter"><a href="http://twitter.com/share?url=/how-to-create-and-run-an-apk-file-from-ionic2-app.html&text=Hi everyone, in this tutorial I’ll show you how to create an apk file (for android) from an Ionic2 app in simple steps, let’s start!
 
-Heading...&p[url]=/docs/sample-data.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
-                <li class="share-twitter"><a href="http://twitter.com/share?url=/docs/sample-data.html&text=Markdown (or Textile), Liquid, HTML &amp; CSS go in. Static sites come out ready for deployment.
 
-Headings
 
-Heading 1
-
-Heading 2
-
-Heading...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
+1...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
             </ul>
         </div>
         
@@ -364,8 +331,8 @@ Heading...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function () {
-            this.page.url = '/docs/sample-data.html';
-            this.page.identifier = '3/11/2016';
+            this.page.url = '/how-to-create-and-run-an-apk-file-from-ionic2-app.html';
+            this.page.identifier = '2/9/2017';
         };
         (function() {
             var d = document, s = d.createElement('script');
