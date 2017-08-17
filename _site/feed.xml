@@ -5,9 +5,24 @@
     <description>I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 04 Aug 2017 23:04:42 -0400</pubDate>
-    <lastBuildDate>Fri, 04 Aug 2017 23:04:42 -0400</lastBuildDate>
+    <pubDate>Wed, 16 Aug 2017 21:56:27 -0300</pubDate>
+    <lastBuildDate>Wed, 16 Aug 2017 21:56:27 -0300</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Django project with Docker</title>
+        <description>&lt;p&gt;Hi everyone, to create a django project with docker, we will use a this official &lt;a href=&quot;https://docs.docker.com/compose/django/&quot; title=&quot;compose docker django&quot;&gt;link&lt;/a&gt; that explain how to do it.&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/bRof6go80rU&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+        <pubDate>Mon, 14 Aug 2017 23:56:00 -0300</pubDate>
+        <link>/docs/django-project-with-docker.html</link>
+        <guid isPermaLink="true">/docs/django-project-with-docker.html</guid>
+        
+        
+        <category>docs</category>
+        
+      </item>
     
       <item>
         <title>Django REST Framework like a ninja</title>
@@ -1337,33 +1352,6 @@ Once it is created, run it, you will have something like this:&lt;/p&gt;
         <category>docs</category>
         
         <category>help</category>
-        
-      </item>
-    
-      <item>
-        <title>What is Jekyll?</title>
-        <description>&lt;p&gt;Jekyll is a parsing engine bundled as a ruby gem used to build static websites from dynamic components such as templates, partials, liquid code, markdown, etc. Jekyll is known as “a simple, blog aware, static site generator”.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1449247709967-d4461a6a6103?ixlib=rb-0.3.5&amp;amp;q=80&amp;amp;fm=jpg&amp;amp;crop=entropy&amp;amp;s=d1b9ba0f56bbb8a965d26e8c4177f4af&quot; alt=&quot;Alt Text&quot; /&gt;&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h3 id=&quot;what-does-jekyll-do&quot;&gt;What does Jekyll do?&lt;/h3&gt;
-
-&lt;p&gt;Jekyll is installed as a ruby gem local computer. Once installed you can call jekyll serve in the terminal in a directory and provided that directory is setup in a way jekyll expects, it will do magic stuff like parse markdown/textile files, compute categories, tags, permalinks, and construct your pages from layout templates and partials.&lt;/p&gt;
-
-&lt;p&gt;Once parsed, Jekyll stores the result in a self-contained static _site folder. The intention here is that you can serve all contents in this folder statically from a plain static web-server.&lt;/p&gt;
-
-&lt;p&gt;You can think of Jekyll as a normalish dynamic blog but rather than parsing content, templates, and tags on each request, Jekyll does this once beforehand and caches the entire website in a folder for serving statically.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Source: &lt;a href=&quot;http://jekyllbootstrap.com/lessons/jekyll-introduction.html&quot; target=&quot;_blank&quot;&gt;http://jekyllbootstrap.com/lessons/jekyll-introduction.html&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 15 Mar 2016 22:00:00 -0300</pubDate>
-        <link>/docs/what-is-jekyll.html</link>
-        <guid isPermaLink="true">/docs/what-is-jekyll.html</guid>
-        
-        
-        <category>docs</category>
         
       </item>
     
