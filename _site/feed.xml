@@ -5,9 +5,34 @@
     <description>I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 16 Aug 2017 21:56:27 -0300</pubDate>
-    <lastBuildDate>Wed, 16 Aug 2017 21:56:27 -0300</lastBuildDate>
+    <pubDate>Tue, 29 Aug 2017 23:37:30 -0300</pubDate>
+    <lastBuildDate>Tue, 29 Aug 2017 23:37:30 -0300</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Validate react native input</title>
+        <description>&lt;p&gt;Hi everyone, today I want to show a proper way to validate our inputs or forms in react native and how to handle errors.&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/pToI4fxRZE8&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Before&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/input_without_error.png&quot; style=&quot;width:300px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/input_with_error.png&quot; style=&quot;width:300px;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 29 Aug 2017 22:49:00 -0300</pubDate>
+        <link>/docs/validate-react-native-input.html</link>
+        <guid isPermaLink="true">/docs/validate-react-native-input.html</guid>
+        
+        
+        <category>docs</category>
+        
+      </item>
     
       <item>
         <title>Django project with Docker</title>
@@ -1309,40 +1334,6 @@ Once it is created, run it, you will have something like this:&lt;/p&gt;
         <guid isPermaLink="true">/docs/help/docmentation.html</guid>
         
         <category>documentation</category>
-        
-        <category>steve</category>
-        
-        <category>jekyll</category>
-        
-        
-        <category>docs</category>
-        
-        <category>help</category>
-        
-      </item>
-    
-      <item>
-        <title>Installation</title>
-        <description>&lt;figure class=&quot;aligncenter&quot;&gt;
-    &lt;img src=&quot;https://snipcartweb-10f3.kxcdn.com/media/all/9570/snipcart-static-site-ecommerce-jekyll.png&quot; /&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;I assume you have already downloaded and installed Ruby. Here’s what you need to do next:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Run &lt;code&gt;gem install jekyll bundler&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Copy the theme in your desired folder.&lt;/li&gt;
-  &lt;li&gt;Enter into the folder by executing &lt;code&gt;cd name-of-the-folder&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Run &lt;code&gt;bundle install&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;If you want to access and customize the theme, use &lt;code&gt;bundle exec jekyll serve&lt;/code&gt;. This way it will be accessible on &lt;code&gt;http://localhost:4000&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Upload the content of the compiled &lt;code&gt;_site&lt;/code&gt; folder on your host server.&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Wed, 16 Mar 2016 08:34:00 -0300</pubDate>
-        <link>/docs/help/installation.html</link>
-        <guid isPermaLink="true">/docs/help/installation.html</guid>
-        
-        <category>installation</category>
         
         <category>steve</category>
         
