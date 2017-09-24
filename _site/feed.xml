@@ -5,9 +5,170 @@
     <description>I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 30 Aug 2017 14:39:38 -0300</pubDate>
-    <lastBuildDate>Wed, 30 Aug 2017 14:39:38 -0300</lastBuildDate>
+    <pubDate>Sun, 24 Sep 2017 18:48:51 -0300</pubDate>
+    <lastBuildDate>Sun, 24 Sep 2017 18:48:51 -0300</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Use Celery + Redis in a Django project with Docker</title>
+        <description>&lt;p&gt;Hi everyone welcome to a new tutorial. Today we’re going to create the basic structure to run Celery + Redis(as a broker) in a Django project with Docker.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h6 id=&quot;you-have-to-install-a-hrefhttpsdocsdockercomengineinstallation-titledocker-sitedockera-and-a-hrefhttpsdocsdockercomcomposeinstall-titledocker-sitedocker-composea-before-start-this-tutorial&quot;&gt;You have to install &lt;a href=&quot;https://docs.docker.com/engine/installation/&quot; title=&quot;docker site&quot;&gt;‘docker’&lt;/a&gt; and &lt;a href=&quot;https://docs.docker.com/compose/install/&quot; title=&quot;docker site&quot;&gt;‘docker-compose’&lt;/a&gt; before start this tutorial.&lt;/h6&gt;
+
+&lt;p&gt;This tutorial will have 2 steps:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Create the all docker’s files&lt;/li&gt;
+  &lt;li&gt;Setting up celery&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;1- Creating all the docker files. This part is based on the official &lt;a href=&quot;https://docs.docker.com/compose/django/&quot; title=&quot;docker site&quot;&gt;site&lt;/a&gt; of docker&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;First, in a folder(it will contain all your project) we have to create 3 files. The first one, will be the ‘&lt;em&gt;Dockerfile&lt;/em&gt;’ for your Django project:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;FROM python:3
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /code
+WORKDIR /code
+ADD requirements.txt /code/
+RUN pip install -r requirements.txt
+ADD . /code/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Here we have used python 3 as image to create our Django project and at the same time creating a ‘&lt;em&gt;code&lt;/em&gt;’ folder in our container with all the files of our current folder, including the &lt;em&gt;requirements.txt&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Now the ‘&lt;em&gt;docker-compose.yml&lt;/em&gt;’ file that will have all the logical structure of our containers:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yml&quot; data-lang=&quot;yml&quot;&gt;&lt;span class=&quot;s&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3'&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;redis&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redis&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redis-server&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;6379:6379'&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;postgres&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;python3 manage.py runserver 0.0.0.0:8000&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.:/code&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;8000:8000'&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;depends_on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;db&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;celery&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;celery -A djangorediscelery worker -B&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.:/code&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;links&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;db&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redis&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The important parts here is that:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;We are creating the redis server in a container&lt;/li&gt;
+  &lt;li&gt;The celery process is in another container that will be created with the same image as your Django project&lt;/li&gt;
+  &lt;li&gt;We’re creating the volume to synchronize our folder with the folder of our Django project&lt;/li&gt;
+  &lt;li&gt;Linking redis with celery.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Finally, the requirements.txt:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;celery==4.1.0
+Django==1.11.5
+psycopg2==2.7.3.1
+redis==2.10.6
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This file doesn’t need explanation ejeje :D&lt;/p&gt;
+
+&lt;p&gt;At this point you must have something like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;your folder
+│   requirements.txt
+│   Dockerfile
+|   docker-compose.yml
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Run:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker-compose docker-compose run web django-admin.py startproject djangorediscelery .
+
+$ docker-compose up
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;2- Setting up celery&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Write this in ‘&lt;em&gt;djangorediscelery/&lt;strong&gt;init&lt;/strong&gt;.py&lt;/em&gt;’:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;__future__&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;absolute_import&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unicode_literals&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# This will make sure the app is always imported when&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Django starts so that shared_task will use this app.&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;.celery&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;celery_app&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;__all__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'celery_app'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Create a ‘&lt;em&gt;djangorediscelery/celery.py&lt;/em&gt;’ file and write this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;__future__&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;absolute_import&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unicode_literals&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;celery&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Celery&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;celery&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shared_task&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# set the default Django settings module for the 'celery' program.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;environ&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setdefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'DJANGO_SETTINGS_MODULE'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'djangorediscelery.settings'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Celery&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'djangorediscelery'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Using a string here means the worker doesn't have to serialize&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# the configuration object to child processes.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# - namespace='CELERY' means all celery-related configuration keys&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   should have a `CELERY_` prefix.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config_from_object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'django.conf:settings'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'CELERY'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Load task modules from all registered Django app configs.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;autodiscover_tasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Create a ‘&lt;em&gt;djangorediscelery/tasks.py&lt;/em&gt;’ file and write this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;__future__&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;absolute_import&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unicode_literals&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;celery&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;task&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In our ‘&lt;em&gt;djangorediscelery/settings.py&lt;/em&gt;’ add this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;CELERY_BROKER_URL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'redis://redis:6379/0'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CELERY_IMPORTS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'djangorediscelery.tasks'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,]&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;celery.schedules&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;crontab&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CELERY_BEAT_SCHEDULE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'printHello'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'task'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'djangorediscelery.tasks.printHello'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'schedule'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And that’s it! Now you just need to run again your docker-compose and you should see each 10 seconds in the celery log the task showing “Hello”&lt;/p&gt;
+
+&lt;p&gt;I leave you &lt;a href=&quot;https://github.com/mopitz199/BasicDockerDjangoRedisCelery&quot; title=&quot;docker site&quot;&gt;here&lt;/a&gt; the code where you can see it!&lt;/p&gt;
+</description>
+        <pubDate>Sun, 24 Sep 2017 17:02:00 -0300</pubDate>
+        <link>/docs/celery-redis-django-docker.html</link>
+        <guid isPermaLink="true">/docs/celery-redis-django-docker.html</guid>
+        
+        
+        <category>docs</category>
+        
+      </item>
     
       <item>
         <title>Http service with token in react native</title>
@@ -1205,133 +1366,6 @@ django-admin startproject DjangoVagrantProject
         <pubDate>Thu, 09 Feb 2017 00:00:00 -0300</pubDate>
         <link>/run-a-django-project-with-vagrant.html</link>
         <guid isPermaLink="true">/run-a-django-project-with-vagrant.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>How to create and run an apk file from Ionic2 app</title>
-        <description>&lt;p&gt;Hi everyone, in this tutorial I’ll show you how to create an apk file (for android) from an Ionic2 app in simple steps, let’s start!&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; First we will need some requirements, you need to:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Install Android Studio or just the SDK(to build the app)&lt;/li&gt;
-  &lt;li&gt;Install the some API’s (16,24, and one of the last once) from the SDK Manager&lt;/li&gt;
-  &lt;li&gt;Install ADB(to install our app in our emulator&lt;/li&gt;
-  &lt;li&gt;create an emulator with the AVD Manager(to run the app)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Create an empty project:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ionic start BlankProject blank --v2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; We need to create the android platform:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ionic platform add android
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;If we get an error like this: “Error: Failed to find ‘ANDROID_HOME’ environment variable. Try setting setting it manually.” is because we need to set our ANDROID_HOME variable. A quick solution would be put something like this:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo &lt;span class=&quot;nv&quot;&gt;ANDROID_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/home/maximiliano/Android/Sdk/&quot;&lt;/span&gt; ionic platform add android
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Where is your case you have to write &lt;strong&gt;YOUR&lt;/strong&gt; path to the SDK.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; After that, we are going to use cordova to build our apk file:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo cordova build --release android
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Again, if you haven’t setted up our ANDROID_HOME enviroment variable you can solve it writting this:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo &lt;span class=&quot;nv&quot;&gt;ANDROID_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/home/maximiliano/Android/Sdk/&quot;&lt;/span&gt; cordova build --release android
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;5.&lt;/strong&gt; Now let’s go to our apk file, in my case is in:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;platforms/android/build/outputs/apk/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;You will see that your app has a name like this: “android-release-unsigned.apk”. That is because you need to sign your app before use it, so, let’s do it!&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;6.&lt;/strong&gt; To sign our app we need to create a key first:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Where “my-release-key.keystore” will be the name that you key will have(you can put any name)&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;7.&lt;/strong&gt; Now we will apply the key in our app:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore android-release-unsigned.apk alias_name
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Where “android-release-unsigned.apk” is the name of the apk that you created steps before&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;8.&lt;/strong&gt; We are almost done, we’re going to optimize a little bit our app running this command:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo /home/maximiliano/Android/Sdk/build-tools/25.0.2/zipalign -v 4 android-release-unsigned.apk final.apk
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Where you have to write YOUR path to “zipalign” that is where your SDK is saved. then you have two names, the first one is your current app and the second one is the name that you optimize app will have(write any name, but don’t forget the apk extension)&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;9.&lt;/strong&gt; Great! now we have our apk ready :D would you like to run it? Let’s do it! Go to the SDK tools:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /home/maximiliano/Android/Sdk/tools/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;And run:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./android avd
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Then, create an AVD(Android Virtual Device) with one of your API Level (16,24, etc…)
-Once it is created, run it, you will have something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/android_screen.png&quot; alt=&quot;_config.yml&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;So you are ready to install you apk in that AVD&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;10.&lt;/strong&gt; Go where our app (final.apk) is and run:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;adb devices
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;You should see something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/seleccion_device.png&quot; alt=&quot;_config.yml&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;That means that you have you emulator running and waitting for our app :D, now install it!&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;adb install final.apk
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;You should see in the AVD the default cordova icon with our project name:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/blank_project_icon.png&quot; alt=&quot;_config.yml&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Come on! run it!!!&lt;/p&gt;
-</description>
-        <pubDate>Thu, 09 Feb 2017 00:00:00 -0300</pubDate>
-        <link>/how-to-create-and-run-an-apk-file-from-ionic2-app.html</link>
-        <guid isPermaLink="true">/how-to-create-and-run-an-apk-file-from-ionic2-app.html</guid>
         
         
       </item>

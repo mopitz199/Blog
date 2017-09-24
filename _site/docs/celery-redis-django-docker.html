@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Use Celery + Redis in a Django project with Docker | Maximiliano Opitz Turra &mdash; Software Engineer </title>
+    <meta property="og:title" content="Use Celery + Redis in a Django project with Docker | Maximiliano Opitz Turra &mdash; Software Engineer " />
+    <meta name="twitter:title" content="Use Celery + Redis in a Django project with Docker | Maximiliano Opitz Turra &mdash; Software Engineer " />
+
+    <meta name="description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.">
+    <meta name="description" property="og:description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks." />
+    <meta name="twitter:description" content="I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <meta name="twitter:site" content="@your_handler" />
+    
+    <meta property="og:url" content="/docs/celery-redis-django-docker.html" />
+
+    <meta property="og:image" content="" />
+    <meta name="twitter:image" content="" />
+
+    <meta name="author" content="Maximiliano Opitz Turra" />
+
+    <meta name="copyright" content="Copyright by Maximiliano Opitz Turra. All Rights Reserved." />
+
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v15/CWB0XYA8bzo0kSThX0UTuA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local('Roboto-Black'), url(https://fonts.gstatic.com/s/roboto/v15/mnpfi9pxYH-Go5UiibESIltXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 300;
+            src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://fonts.gstatic.com/s/roboto/v15/7m8l7TlFO-S3VkhHuR0at44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 400;
+            src: local('Roboto Italic'), local('Roboto-Italic'), url(https://fonts.gstatic.com/s/roboto/v15/vPcynSL0qHq_6dX7lKVByfesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 700;
+            src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(https://fonts.gstatic.com/s/roboto/v15/t6Nd4cfPRhZP44Q5QAjcC44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 900;
+            src: local('Roboto Black Italic'), local('Roboto-BlackItalic'), url(https://fonts.gstatic.com/s/roboto/v15/bmC0pGMXrhphrZJmniIZpY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+    </style>
+    
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <link rel="canonical" href="/docs/celery-redis-django-docker.html">
+
+    <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
+</head>
+
+    <body>
+        <div class="wrapper clear">
+            <aside class="user-profile fixed" role="complementary">
+    <a href=""><img class="avatar" src="/assets/perfil.jpg" /></a>
+    <strong class="my-name">Maximiliano Opitz Turra</strong>
+    <span class="my-job-title">Software Engineer</span>
+
+    
+        
+        <div class="mainmenu">
+            <a href="/" >Home</a>
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a href="/portfolio/" >Portfolio</a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </div>
+        
+    
+
+    <p class="about-me">I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.</p>
+
+    <ul>
+        <li><a href="https://www.facebook.com/mturra"><svg title="facebook" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></li><li><a href="https://www.linkedin.com/in/mopitz199"><svg title="linkedin" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#linkedin-icon"></use></svg></a></li><li><a href="https://github.com/mopitz199"><svg title="github" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#github-icon"></use></svg></a></li><li><a href="https://www.youtube.com/channel/UC4vxgNgkH9san9rcuEMdDAA"><svg title="youtube" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#youtube-icon"></use></svg></a></li>
+
+        
+            <li><a href="mailto:mopitz199@gmail.com"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#email-icon"></use></svg></a></li>
+        
+
+        
+    </ul>
+</aside>
+
+
+            <main class="the-content" role="main">
+                <div class="search" role="search">
+    <div>
+        <div class="show-results-count">0 Results</div>
+        <div class="search-holder clear">
+            <input type="text" id="search-input" placeholder="search for...">
+        </div>
+    </div>
+    <ul id="results-container" class="results-container"></ul>
+</div>
+
+
+                <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <ul class="clear">
+            <li><time datetime="2017-09-24T17:02:00-03:00" itemprop="datePublished">24 Sep, 2017</time></li>
+            
+                
+                <li class="cats">
+                    
+                        <a href="/categories/docs/">docs</a>
+                    
+                </li>
+                
+            
+        </ul>
+        <h2 itemprop="name headline">Use Celery + Redis in a Django project with Docker</h2>
+    </header>
+
+    <div class="post-content">
+        <p>Hi everyone welcome to a new tutorial. Today we’re going to create the basic structure to run Celery + Redis(as a broker) in a Django project with Docker.</p>
+
+<!--more-->
+
+<h6 id="you-have-to-install-a-hrefhttpsdocsdockercomengineinstallation-titledocker-sitedockera-and-a-hrefhttpsdocsdockercomcomposeinstall-titledocker-sitedocker-composea-before-start-this-tutorial">You have to install <a href="https://docs.docker.com/engine/installation/" title="docker site">‘docker’</a> and <a href="https://docs.docker.com/compose/install/" title="docker site">‘docker-compose’</a> before start this tutorial.</h6>
+
+<p>This tutorial will have 2 steps:</p>
+<ul>
+  <li>Create the all docker’s files</li>
+  <li>Setting up celery</li>
+</ul>
+
+<p><strong>1- Creating all the docker files. This part is based on the official <a href="https://docs.docker.com/compose/django/" title="docker site">site</a> of docker</strong></p>
+
+<p>First, in a folder(it will contain all your project) we have to create 3 files. The first one, will be the ‘<em>Dockerfile</em>’ for your Django project:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">FROM python:3
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /code
+WORKDIR /code
+ADD requirements.txt /code/
+RUN pip install -r requirements.txt
+ADD . /code/</code></pre></figure>
+
+<p>Here we have used python 3 as image to create our Django project and at the same time creating a ‘<em>code</em>’ folder in our container with all the files of our current folder, including the <em>requirements.txt</em></p>
+
+<p>Now the ‘<em>docker-compose.yml</em>’ file that will have all the logical structure of our containers:</p>
+
+<figure class="highlight"><pre><code class="language-yml" data-lang="yml"><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">redis</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">redis</span>
+    <span class="s">command</span><span class="pi">:</span> <span class="s">redis-server</span>
+    <span class="s">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">6379:6379'</span>
+  <span class="s">db</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">postgres</span>
+  <span class="s">web</span><span class="pi">:</span>
+    <span class="s">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="s">command</span><span class="pi">:</span> <span class="s">python3 manage.py runserver 0.0.0.0:8000</span>
+    <span class="s">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">.:/code</span>
+    <span class="s">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">8000:8000'</span>
+    <span class="s">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db</span>
+  <span class="s">celery</span><span class="pi">:</span>
+    <span class="s">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="s">command</span><span class="pi">:</span> <span class="s">celery -A djangorediscelery worker -B</span>
+    <span class="s">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">.:/code</span>
+    <span class="s">links</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db</span>
+      <span class="pi">-</span> <span class="s">redis</span></code></pre></figure>
+
+<p>The important parts here is that:</p>
+<ul>
+  <li>We are creating the redis server in a container</li>
+  <li>The celery process is in another container that will be created with the same image as your Django project</li>
+  <li>We’re creating the volume to synchronize our folder with the folder of our Django project</li>
+  <li>Linking redis with celery.</li>
+</ul>
+
+<p>Finally, the requirements.txt:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>celery==4.1.0
+Django==1.11.5
+psycopg2==2.7.3.1
+redis==2.10.6
+</code></pre>
+</div>
+
+<p>This file doesn’t need explanation ejeje :D</p>
+
+<p>At this point you must have something like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>your folder
+│   requirements.txt
+│   Dockerfile
+|   docker-compose.yml
+</code></pre>
+</div>
+
+<p>Run:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ docker-compose docker-compose run web django-admin.py startproject djangorediscelery .
+
+$ docker-compose up
+</code></pre>
+</div>
+
+<p><strong>2- Setting up celery</strong></p>
+
+<p>Write this in ‘<em>djangorediscelery/<strong>init</strong>.py</em>’:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="c"># This will make sure the app is always imported when</span>
+<span class="c"># Django starts so that shared_task will use this app.</span>
+<span class="kn">from</span> <span class="nn">.celery</span> <span class="kn">import</span> <span class="n">app</span> <span class="k">as</span> <span class="n">celery_app</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">'celery_app'</span><span class="p">]</span></code></pre></figure>
+
+<p>Create a ‘<em>djangorediscelery/celery.py</em>’ file and write this:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">Celery</span>
+<span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">shared_task</span>
+
+<span class="c"># set the default Django settings module for the 'celery' program.</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">'DJANGO_SETTINGS_MODULE'</span><span class="p">,</span> <span class="s">'djangorediscelery.settings'</span><span class="p">)</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s">'djangorediscelery'</span><span class="p">)</span>
+
+<span class="c"># Using a string here means the worker doesn't have to serialize</span>
+<span class="c"># the configuration object to child processes.</span>
+<span class="c"># - namespace='CELERY' means all celery-related configuration keys</span>
+<span class="c">#   should have a `CELERY_` prefix.</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config_from_object</span><span class="p">(</span><span class="s">'django.conf:settings'</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s">'CELERY'</span><span class="p">)</span>
+
+<span class="c"># Load task modules from all registered Django app configs.</span>
+<span class="n">app</span><span class="o">.</span><span class="n">autodiscover_tasks</span><span class="p">()</span></code></pre></figure>
+
+<p>Create a ‘<em>djangorediscelery/tasks.py</em>’ file and write this:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">task</span>
+
+<span class="nd">@task</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">printHello</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">"Hello"</span></code></pre></figure>
+
+<p>In our ‘<em>djangorediscelery/settings.py</em>’ add this:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">CELERY_BROKER_URL</span> <span class="o">=</span> <span class="s">'redis://redis:6379/0'</span>
+<span class="n">CELERY_IMPORTS</span> <span class="o">=</span> <span class="p">[</span><span class="s">'djangorediscelery.tasks'</span><span class="p">,]</span>
+<span class="kn">from</span> <span class="nn">celery.schedules</span> <span class="kn">import</span> <span class="n">crontab</span>
+<span class="n">CELERY_BEAT_SCHEDULE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'printHello'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'task'</span><span class="p">:</span> <span class="s">'djangorediscelery.tasks.printHello'</span><span class="p">,</span>
+        <span class="s">'schedule'</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>And that’s it! Now you just need to run again your docker-compose and you should see each 10 seconds in the celery log the task showing “Hello”</p>
+
+<p>I leave you <a href="https://github.com/mopitz199/BasicDockerDjangoRedisCelery" title="docker site">here</a> the code where you can see it!</p>
+
+    </div>
+
+    <footer class="post-footer">
+        <div class="share">Share
+            <ul class="social-networks">
+                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Use Celery + Redis in a Django project with Docker&p[summary]=Hi everyone welcome to a new tutorial. Today we’re going to create the basic structure to run Celery + Redis(as a broker) in a Django pro...&p[url]=/docs/celery-redis-django-docker.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
+                <li class="share-twitter"><a href="http://twitter.com/share?url=/docs/celery-redis-django-docker.html&text=Hi everyone welcome to a new tutorial. Today we’re going to create the basic structure to run Celery + Redis(as a broker) in a Django pro...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
+            </ul>
+        </div>
+        
+        <div class="tags">
+            <ul>
+                
+            </ul>
+        </div>
+        
+    </footer>
+</article>
+
+
+<aside class="comments" role="complementary">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = '/docs/celery-redis-django-docker.html';
+            this.page.identifier = '9/24/2017';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');
+
+            s.src = '//your_disqus_site.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+</aside>
+
+            </main>
+        </div>
+
+        <script src="/assets/js/jquery-1.12.2.min.js"></script>
+<script src="/assets/js/backtotop.js"></script>
+<script src="/assets/js/lunr.min.js"></script>
+<script src="/assets/js/lunr-feed.js"></script>
+<script src="/assets/js/jquery.fitvids.js"></script>
+<script src="/assets/js/svg4everybody.min.js"></script>
+<script src="/assets/js/scripts.js"></script>
+
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-XXXXXXX-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    </body>
+</html>
