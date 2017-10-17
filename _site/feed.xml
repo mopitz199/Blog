@@ -5,9 +5,34 @@
     <description>I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 24 Sep 2017 18:48:51 -0300</pubDate>
-    <lastBuildDate>Sun, 24 Sep 2017 18:48:51 -0300</lastBuildDate>
+    <pubDate>Mon, 16 Oct 2017 21:01:36 -0300</pubDate>
+    <lastBuildDate>Mon, 16 Oct 2017 21:01:36 -0300</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Create a django project with gunicorn and nginx using docker</title>
+        <description>&lt;p&gt;Hi everyone welcome to a new tutorial. Today we’re going to create a django production environment with docker.
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;We have to create 2 docker containers:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Django container(with gunicorn)&lt;/li&gt;
+  &lt;li&gt;Nginx container&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Watch the next video so see how to do it! :D&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/9cLBvi15sGI&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+        <pubDate>Mon, 16 Oct 2017 17:02:00 -0300</pubDate>
+        <link>/docs/django-gunicorn-nginx-docker.html</link>
+        <guid isPermaLink="true">/docs/django-gunicorn-nginx-docker.html</guid>
+        
+        
+        <category>docs</category>
+        
+      </item>
     
       <item>
         <title>Use Celery + Redis in a Django project with Docker</title>
@@ -1228,144 +1253,6 @@ mantiene aisalada su informacion o datos.&lt;/p&gt;
         <pubDate>Sat, 11 Feb 2017 00:00:00 -0300</pubDate>
         <link>/add-a-tab-and-a-menu-in-the-same-ionic-2-project.html</link>
         <guid isPermaLink="true">/add-a-tab-and-a-menu-in-the-same-ionic-2-project.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Run a Django(with postgresql) project with Vagrant</title>
-        <description>&lt;p&gt;Hello! Have the chance to deploy in a very easy way a Django project no matter which operating system you are using with Vagrant.&lt;/p&gt;
-
-&lt;p&gt;Requirements for this tutorial:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Virtualenvwrapper&lt;/li&gt;
-  &lt;li&gt;VirtualBox&lt;/li&gt;
-  &lt;li&gt;Vagrant&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;First we need to create a virtual environment, install django and create a project:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkvirtualenv DjangoVagrant
-pip install django
-django-admin startproject DjangoVagrantProject
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Now we need to find a proper box for our virtualization, you can find a list of boxes in the vagrant page https://atlas.hashicorp.com/boxes/search. I will use the simplest one (ubuntu/trusty64):&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant init ubuntu/trusty64
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; Great! we just created a “VagrantFile” in our django project. This file has all our setting for the virtual machine. We are going to open it and edit some lines:&lt;/p&gt;
-
-&lt;p&gt;-Uncomment this line:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 8080
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;and edit it like this:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 9090
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Uncomment this line:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;config.vm.network &quot;private_network&quot;, ip: &quot;192.168.33.10&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;and this line:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;config.vm.network &quot;public_network&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;We have our VagrantFile ready to create the virtual machine :D&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; Create the virtual machine:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant up
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;It can take a while, but then we will have our virtual machine running :D&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;5.&lt;/strong&gt; Now, from the Virtualenvwrapper we will create our requirements.txt file:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip freeze &amp;gt; requirements.txt
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;We are ready to install django in our virtual machine&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;6.&lt;/strong&gt; I will give you a script that create you a django project with virtualenv, it install all the dependencies from the requirements.txt and also it install postgres. Is amazing:&lt;/p&gt;
-
-&lt;p&gt;https://github.com/mopitz199/Script-For-Django-In-Vagrant&lt;/p&gt;
-
-&lt;p&gt;Copy that file in the root of your django project&lt;/p&gt;
-
-&lt;p&gt;Note: you will find inside of this file the username of postgres and the database with his password as well, you can edit it as your wish (according to the database information of your django project)&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;7.&lt;/strong&gt; Now we need to get into our virtual machine and go to our project:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant ssh
-&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /vagrant
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;8.&lt;/strong&gt; At this moment, we have a folder with all our django project but nothing else. We will run the file that we downloaded and this script will install&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;virtuelenv&lt;/li&gt;
-  &lt;li&gt;postgresql&lt;/li&gt;
-  &lt;li&gt;virtuelenvwrapper(it will install everything in this wrapper, you can change the name of the wrapper in the file) all the requirements.txt dependencies&lt;/li&gt;
-  &lt;li&gt;Also it will create a database with a username as I told you steps before and it will make the migrations and migrate the django project.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Also it will create a database with a username as I told you steps before and it will make the migrations and migrate the django project.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;config.sh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;It will take a long time and it will ask you your aprovement for some instalations (nothing complicated).&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;8.&lt;/strong&gt; After that you will have everything installed and ready to run your django project from the virtual machine. Run “ifconfig” to check you ip and allow it in the django setting:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ifconfig
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/inet.png&quot; alt=&quot;_config.yml&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nano DjangoVagrantProject/settings.py
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;and paste the ip in the “ALLOWED_HOST”&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/allowed_host.png&quot; alt=&quot;_config.yml&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Finally run:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python manage.py runserver 192.168.0.17:9090
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;And there you have it! a django project running in a virtual machine with vagrant :D&lt;/p&gt;
-</description>
-        <pubDate>Thu, 09 Feb 2017 00:00:00 -0300</pubDate>
-        <link>/run-a-django-project-with-vagrant.html</link>
-        <guid isPermaLink="true">/run-a-django-project-with-vagrant.html</guid>
         
         
       </item>
