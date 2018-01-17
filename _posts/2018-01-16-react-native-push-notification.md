@@ -9,7 +9,7 @@ category:
 
 
 Hi everyone, today I want to show how to use push notification in React Native.
-I will use local an remote notification using the google server notification.
+I will use local and remote notification using the google server notification.
 
 <!--more-->
 
