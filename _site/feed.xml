@@ -2,17 +2,34 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <description>I'm a full stack coder, mainly in frameworks like Django, Ionic 2 and React Native. Also working in teams with Git and standardizing the develops environments with Vagrant or Docker. Welcome to contact me in the bellow social networks.</description>
+    <description>I'm a full stack coder, mainly in frameworks like Django and React Native. Also I've been working in teams with Git and standardizing the develops environments with Docker or Vagrant. Welcome to contact me in the bellow social networks.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 16 Jan 2018 22:38:09 -0300</pubDate>
-    <lastBuildDate>Tue, 16 Jan 2018 22:38:09 -0300</lastBuildDate>
+    <pubDate>Tue, 11 Sep 2018 00:42:32 -0300</pubDate>
+    <lastBuildDate>Tue, 11 Sep 2018 00:42:32 -0300</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Sync Vs Async Request Promises JavaScript</title>
+        <description>&lt;p&gt;Hi everyone, today I want to show a comparison between async and sync request when we want to do something when multiple requests are done.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/x9pN54bP6us&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+        <pubDate>Tue, 11 Sep 2018 00:40:00 -0300</pubDate>
+        <link>/docs/sync_vs_async_request_promises_javascript.html</link>
+        <guid isPermaLink="true">/docs/sync_vs_async_request_promises_javascript.html</guid>
+        
+        
+        <category>docs</category>
+        
+      </item>
     
       <item>
         <title>React Native Push Notification</title>
         <description>&lt;p&gt;Hi everyone, today I want to show how to use push notification in React Native.
-I will use local an remote notification using the google server notification.&lt;/p&gt;
+I will use local and remote notification using the google server notification.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -931,51 +948,6 @@ mantiene aisalada su informacion o datos.&lt;/p&gt;
         <pubDate>Sat, 11 Feb 2017 00:00:00 -0300</pubDate>
         <link>/postgresql-cheatsheets.html</link>
         <guid isPermaLink="true">/postgresql-cheatsheets.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Minify an Ionic 2 project with app-script</title>
-        <description>&lt;p&gt;Hello everyone, in this tutorial I will show you in a very short way how you can minify an Ionic 2 project. Let’s start!&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; Create an empty project:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ionic start MyMinifyProject blank --v2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Go to the &lt;em&gt;package.json&lt;/em&gt; and we have to add this line:&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;ionic:minify&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ionic-app-scripts minify&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;That line will able you to execute the script to miinify your project. You can go to this link to see more about it and take a look to all the script that are able:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://ionicframework.com/docs/v2/resources/app-scripts/&quot;&gt;https://ionicframework.com/docs/v2/resources/app-scripts/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;And this link to see the options that you can use in each script:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/driftyco/ionic-app-scripts#command-line-flags&quot;&gt;https://github.com/driftyco/ionic-app-scripts#command-line-flags&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; We are done! just go to the terminal and run:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo npm run ionic:minify
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;You will have the &lt;em&gt;“www”&lt;/em&gt; folder with the css and js minify ready to be served for any service :D&lt;/p&gt;
-</description>
-        <pubDate>Sat, 11 Feb 2017 00:00:00 -0300</pubDate>
-        <link>/minify-an-ionic-2-project-with-app-script.html</link>
-        <guid isPermaLink="true">/minify-an-ionic-2-project-with-app-script.html</guid>
         
         
       </item>
