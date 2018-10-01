@@ -141,6 +141,8 @@
             
                 
             
+                
+            
         </div>
         
     
@@ -172,6 +174,51 @@
 
 
                 
+<article class="post" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <ul class="clear">
+            <li><time datetime="2017-02-11T00:00:00-03:00" itemprop="datePublished">11 Feb, 2017</time></li>
+            
+        </ul>
+        <h2 itemprop="name headline"><a href="/postgresql-cheatsheets.html">PostgreSQL CheatSheets</a></h2>
+    </header>
+
+    <div class="post-content">
+        <p><strong>Service</strong> =&gt; <strong>Instance</strong>: Response a una direccion IP y puerto especifico. tiene sus propios permisos de acceso,
+mantiene aisalada su informacion o datos.</p>
+
+<hr />
+
+<p><strong>Database</strong> =&gt; Es una organizacion logica de datos y codigo. Un Service(<em>Instance</em>) puede contener una o mas Databases</p>
+
+<hr />
+
+
+
+        
+            <p><a href="/postgresql-cheatsheets.html" role="button">Read More</a></p>
+        
+    </div>
+
+    <footer class="post-footer">
+        <div class="share">Share
+            <ul class="social-networks">
+                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=PostgreSQL CheatSheets&p[summary]=Service =&gt; Instance: Response a una direccion IP y puerto especifico. tiene sus propios permisos de acceso,
+mantiene aisalada su infor...&p[url]=/postgresql-cheatsheets.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
+                <li class="share-twitter"><a href="http://twitter.com/share?url=/postgresql-cheatsheets.html&text=Service =&gt; Instance: Response a una direccion IP y puerto especifico. tiene sus propios permisos de acceso,
+mantiene aisalada su infor...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
+            </ul>
+        </div>
+        
+        <div class="tags">
+            <ul>
+                
+            </ul>
+        </div>
+        
+    </footer>
+</article>
+
 <article class="post" role="article" itemscope itemtype="http://schema.org/BlogPosting">
     <header class="post-header">
         <ul class="clear">
@@ -775,95 +822,6 @@ Heading...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this
     </footer>
 </article>
 
-<article class="post" role="article" itemscope itemtype="http://schema.org/BlogPosting">
-    <header class="post-header">
-        <ul class="clear">
-            <li><time datetime="2016-02-21T00:00:00-03:00" itemprop="datePublished">21 Feb, 2016</time></li>
-            
-        </ul>
-        <h2 itemprop="name headline"><a href="/script-generate-django-project-in-vagrant.html">Script Generate Django Project In Vagrant</a></h2>
-    </header>
-
-    <div class="post-content">
-        <h3 id="script-to-generate-a-django-app-with-vagrant">Script to generate a Django App with Vagrant</h3>
-
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-
-<span class="nv">VIRTUALENV_NAME</span><span class="o">=</span><span class="s2">"vagrantdev"</span>
-<span class="nv">DB_USER</span><span class="o">=</span><span class="s2">"vagrantuser"</span>
-<span class="nv">DB_NAME</span><span class="o">=</span><span class="s2">"vagrantdb"</span>
-<span class="nv">DB_PASSWORD</span><span class="o">=</span><span class="s2">"vagrantpass"</span>
-
-<span class="c"># Install of pip and their dependencies</span>
-sudo apt-get update
-sudo apt-get install python-pip libpq-dev python-dev build-essential
-sudo pip install --upgrade pip
-sudo pip install --upgrade virtualenv
-sudo pip install --upgrade setuptools
-
-<span class="c"># Install postgres</span>
-sudo apt-get install postgresql postgresql-contrib
-
-<span class="c"># Create databse</span>
-sudo -u postgres psql -c <span class="s2">"CREATE DATABASE </span><span class="nv">$DB_NAME</span><span class="s2">;"</span>
-sudo -u postgres psql -c <span class="s2">"CREATE USER </span><span class="nv">$DB_USER</span><span class="s2"> WITH PASSWORD '</span><span class="nv">$DB_PASSWORD</span><span class="s2">';"</span>
-sudo -u postgres psql -c <span class="s2">"ALTER ROLE </span><span class="nv">$DB_USER</span><span class="s2"> SET client_encoding TO 'utf8';"</span>
-sudo -u postgres psql -c <span class="s2">"ALTER ROLE </span><span class="nv">$DB_USER</span><span class="s2"> SET default_transaction_isolation TO 'read committed';"</span>
-sudo -u postgres psql -c <span class="s2">"ALTER ROLE </span><span class="nv">$DB_USER</span><span class="s2"> SET timezone TO 'UTC';"</span>
-sudo -u postgres psql -c <span class="s2">"GRANT ALL PRIVILEGES ON DATABASE </span><span class="nv">$DB_NAME</span><span class="s2"> TO </span><span class="nv">$DB_NAME</span><span class="s2">;"</span>
-
-
-<span class="c"># Install virtualenvwrapper</span>
-sudo pip install virtualenvwrapper
-<span class="nb">export </span><span class="nv">WORKON_HOME</span><span class="o">=</span>~/Envs
-<span class="nb">source</span> /usr/local/bin/virtualenvwrapper.sh
-mkvirtualenv <span class="nv">$VIRTUALENV_NAME</span>
-workon <span class="nv">$VIRTUALENV_NAME</span>
-
-
-<span class="c"># Install django</span>
-pip install -r requirements.txt
-
-python manage.py makemigrations
-python manage.py migrate
-</code></pre>
-</div>
-
-
-        
-    </div>
-
-    <footer class="post-footer">
-        <div class="share">Share
-            <ul class="social-networks">
-                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Script Generate Django Project In Vagrant&p[summary]=Script to generate a Django App with Vagrant
-
-#!/bin/bash
-
-VIRTUALENV_NAME="vagrantdev"
-DB_USER="vagrantuser"
-DB_NAME="vagrantdb"
-DB_PASS...&p[url]=/script-generate-django-project-in-vagrant.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
-                <li class="share-twitter"><a href="http://twitter.com/share?url=/script-generate-django-project-in-vagrant.html&text=Script to generate a Django App with Vagrant
-
-#!/bin/bash
-
-VIRTUALENV_NAME="vagrantdev"
-DB_USER="vagrantuser"
-DB_NAME="vagrantdb"
-DB_PASS...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
-            </ul>
-        </div>
-        
-        <div class="tags">
-            <ul>
-                
-            </ul>
-        </div>
-        
-    </footer>
-</article>
-
 
 
 <div class="pagination clear" role="navigation" aria-label="pagination">
@@ -871,8 +829,10 @@ DB_PASS...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this
         <a href="/" class="previous">&larr; Previous</a>
     
 
-    <span class="page_number">Page 2 of 2</span>
+    <span class="page_number">Page 2 of 3</span>
 
+    
+        <a href="/page3/" class="next">Next &rarr;</a>
     
 </div>
 

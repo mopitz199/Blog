@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>What is Jekyll? | Maximiliano Opitz Turra &mdash; Software Engineer </title>
-    <meta property="og:title" content="What is Jekyll? | Maximiliano Opitz Turra &mdash; Software Engineer " />
-    <meta name="twitter:title" content="What is Jekyll? | Maximiliano Opitz Turra &mdash; Software Engineer " />
+    <title> Maximiliano Opitz Turra &mdash; Software Engineer </title>
+    <meta property="og:title" content=" Maximiliano Opitz Turra &mdash; Software Engineer " />
+    <meta name="twitter:title" content=" Maximiliano Opitz Turra &mdash; Software Engineer " />
 
     <meta name="description" content="I'm a full stack coder, mainly in frameworks like Django and React Native. Also I've been working in teams with Git and standardizing the develops environments with Docker or Vagrant. Welcome to contact me in the bellow social networks.">
     <meta name="description" property="og:description" content="I'm a full stack coder, mainly in frameworks like Django and React Native. Also I've been working in teams with Git and standardizing the develops environments with Docker or Vagrant. Welcome to contact me in the bellow social networks." />
@@ -17,7 +17,7 @@
     
     <meta name="twitter:site" content="@your_handler" />
     
-    <meta property="og:url" content="/docs/what-is-jekyll.html" />
+    <meta property="og:url" content="/page3/" />
 
     <meta property="og:image" content="" />
     <meta name="twitter:image" content="" />
@@ -96,7 +96,7 @@
     
     <link rel="stylesheet" href="/assets/css/main.css">
 
-    <link rel="canonical" href="/docs/what-is-jekyll.html">
+    <link rel="canonical" href="/page3/">
 
     <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
 </head>
@@ -173,47 +173,84 @@
 </div>
 
 
-                <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+                
+<article class="post" role="article" itemscope itemtype="http://schema.org/BlogPosting">
     <header class="post-header">
         <ul class="clear">
-            <li><time datetime="2016-03-15T22:00:00-03:00" itemprop="datePublished">15 Mar, 2016</time></li>
-            
-                
-                <li class="cats">
-                    
-                        <a href="/categories/docs/">docs</a>
-                    
-                </li>
-                
+            <li><time datetime="2016-02-21T00:00:00-03:00" itemprop="datePublished">21 Feb, 2016</time></li>
             
         </ul>
-        <h2 itemprop="name headline">What is Jekyll?</h2>
+        <h2 itemprop="name headline"><a href="/script-generate-django-project-in-vagrant.html">Script Generate Django Project In Vagrant</a></h2>
     </header>
 
     <div class="post-content">
-        <p>Jekyll is a parsing engine bundled as a ruby gem used to build static websites from dynamic components such as templates, partials, liquid code, markdown, etc. Jekyll is known as “a simple, blog aware, static site generator”.</p>
+        <h3 id="script-to-generate-a-django-app-with-vagrant">Script to generate a Django App with Vagrant</h3>
 
-<p><img src="https://images.unsplash.com/photo-1449247709967-d4461a6a6103?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;s=d1b9ba0f56bbb8a965d26e8c4177f4af" alt="Alt Text" /></p>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
-<!--more-->
+<span class="nv">VIRTUALENV_NAME</span><span class="o">=</span><span class="s2">"vagrantdev"</span>
+<span class="nv">DB_USER</span><span class="o">=</span><span class="s2">"vagrantuser"</span>
+<span class="nv">DB_NAME</span><span class="o">=</span><span class="s2">"vagrantdb"</span>
+<span class="nv">DB_PASSWORD</span><span class="o">=</span><span class="s2">"vagrantpass"</span>
 
-<h3 id="what-does-jekyll-do">What does Jekyll do?</h3>
+<span class="c"># Install of pip and their dependencies</span>
+sudo apt-get update
+sudo apt-get install python-pip libpq-dev python-dev build-essential
+sudo pip install --upgrade pip
+sudo pip install --upgrade virtualenv
+sudo pip install --upgrade setuptools
 
-<p>Jekyll is installed as a ruby gem local computer. Once installed you can call jekyll serve in the terminal in a directory and provided that directory is setup in a way jekyll expects, it will do magic stuff like parse markdown/textile files, compute categories, tags, permalinks, and construct your pages from layout templates and partials.</p>
+<span class="c"># Install postgres</span>
+sudo apt-get install postgresql postgresql-contrib
 
-<p>Once parsed, Jekyll stores the result in a self-contained static _site folder. The intention here is that you can serve all contents in this folder statically from a plain static web-server.</p>
+<span class="c"># Create databse</span>
+sudo -u postgres psql -c <span class="s2">"CREATE DATABASE </span><span class="nv">$DB_NAME</span><span class="s2">;"</span>
+sudo -u postgres psql -c <span class="s2">"CREATE USER </span><span class="nv">$DB_USER</span><span class="s2"> WITH PASSWORD '</span><span class="nv">$DB_PASSWORD</span><span class="s2">';"</span>
+sudo -u postgres psql -c <span class="s2">"ALTER ROLE </span><span class="nv">$DB_USER</span><span class="s2"> SET client_encoding TO 'utf8';"</span>
+sudo -u postgres psql -c <span class="s2">"ALTER ROLE </span><span class="nv">$DB_USER</span><span class="s2"> SET default_transaction_isolation TO 'read committed';"</span>
+sudo -u postgres psql -c <span class="s2">"ALTER ROLE </span><span class="nv">$DB_USER</span><span class="s2"> SET timezone TO 'UTC';"</span>
+sudo -u postgres psql -c <span class="s2">"GRANT ALL PRIVILEGES ON DATABASE </span><span class="nv">$DB_NAME</span><span class="s2"> TO </span><span class="nv">$DB_NAME</span><span class="s2">;"</span>
 
-<p>You can think of Jekyll as a normalish dynamic blog but rather than parsing content, templates, and tags on each request, Jekyll does this once beforehand and caches the entire website in a folder for serving statically.</p>
 
-<p><em>Source: <a href="http://jekyllbootstrap.com/lessons/jekyll-introduction.html" target="_blank">http://jekyllbootstrap.com/lessons/jekyll-introduction.html</a></em></p>
+<span class="c"># Install virtualenvwrapper</span>
+sudo pip install virtualenvwrapper
+<span class="nb">export </span><span class="nv">WORKON_HOME</span><span class="o">=</span>~/Envs
+<span class="nb">source</span> /usr/local/bin/virtualenvwrapper.sh
+mkvirtualenv <span class="nv">$VIRTUALENV_NAME</span>
+workon <span class="nv">$VIRTUALENV_NAME</span>
 
+
+<span class="c"># Install django</span>
+pip install -r requirements.txt
+
+python manage.py makemigrations
+python manage.py migrate
+</code></pre>
+</div>
+
+
+        
     </div>
 
     <footer class="post-footer">
         <div class="share">Share
             <ul class="social-networks">
-                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=What is Jekyll?&p[summary]=Jekyll is a parsing engine bundled as a ruby gem used to build static websites from dynamic components such as templates, partials, liqui...&p[url]=/docs/what-is-jekyll.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
-                <li class="share-twitter"><a href="http://twitter.com/share?url=/docs/what-is-jekyll.html&text=Jekyll is a parsing engine bundled as a ruby gem used to build static websites from dynamic components such as templates, partials, liqui...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
+                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Script Generate Django Project In Vagrant&p[summary]=Script to generate a Django App with Vagrant
+
+#!/bin/bash
+
+VIRTUALENV_NAME="vagrantdev"
+DB_USER="vagrantuser"
+DB_NAME="vagrantdb"
+DB_PASS...&p[url]=/script-generate-django-project-in-vagrant.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
+                <li class="share-twitter"><a href="http://twitter.com/share?url=/script-generate-django-project-in-vagrant.html&text=Script to generate a Django App with Vagrant
+
+#!/bin/bash
+
+VIRTUALENV_NAME="vagrantdev"
+DB_USER="vagrantuser"
+DB_NAME="vagrantdb"
+DB_PASS...&hashtags=" rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
             </ul>
         </div>
         
@@ -227,23 +264,16 @@
 </article>
 
 
-<aside class="comments" role="complementary">
-    <div id="disqus_thread"></div>
-    <script>
-        var disqus_config = function () {
-            this.page.url = '/docs/what-is-jekyll.html';
-            this.page.identifier = '3/15/2016';
-        };
-        (function() {
-            var d = document, s = d.createElement('script');
 
-            s.src = '//your_disqus_site.disqus.com/embed.js';
+<div class="pagination clear" role="navigation" aria-label="pagination">
+    
+        <a href="/page2/" class="previous">&larr; Previous</a>
+    
 
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-</aside>
+    <span class="page_number">Page 3 of 3</span>
+
+    
+</div>
 
             </main>
         </div>

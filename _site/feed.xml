@@ -5,9 +5,26 @@
     <description>I'm a full stack coder, mainly in frameworks like Django and React Native. Also I've been working in teams with Git and standardizing the develops environments with Docker or Vagrant. Welcome to contact me in the bellow social networks.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 11 Sep 2018 00:42:32 -0300</pubDate>
-    <lastBuildDate>Tue, 11 Sep 2018 00:42:32 -0300</lastBuildDate>
+    <pubDate>Mon, 01 Oct 2018 00:33:27 -0300</pubDate>
+    <lastBuildDate>Mon, 01 Oct 2018 00:33:27 -0300</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Avoid multiple request on an input change event</title>
+        <description>&lt;p&gt;Hi everyone, today I want to show how to avoid multiple request when we are triggering an event when an input text is changing all the time, in order the make our code faster.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ZpAmjXa1S1I&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+        <pubDate>Mon, 01 Oct 2018 00:10:00 -0300</pubDate>
+        <link>/docs/avoid-multiple-request-on-inpit-change-event.html</link>
+        <guid isPermaLink="true">/docs/avoid-multiple-request-on-inpit-change-event.html</guid>
+        
+        
+        <category>docs</category>
+        
+      </item>
     
       <item>
         <title>Sync Vs Async Request Promises JavaScript</title>
@@ -657,297 +674,6 @@ $ docker-compose up
         <pubDate>Fri, 03 Mar 2017 00:00:00 -0300</pubDate>
         <link>/django-rest-framework-like-a-ninja.html</link>
         <guid isPermaLink="true">/django-rest-framework-like-a-ninja.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>PostgreSQL CheatSheets</title>
-        <description>&lt;p&gt;&lt;strong&gt;Service&lt;/strong&gt; =&amp;gt; &lt;strong&gt;Instance&lt;/strong&gt;: Response a una direccion IP y puerto especifico. tiene sus propios permisos de acceso,
-mantiene aisalada su informacion o datos.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Database&lt;/strong&gt; =&amp;gt; Es una organizacion logica de datos y codigo. Un Service(&lt;em&gt;Instance&lt;/em&gt;) puede contener una o mas Databases&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;&lt;strong&gt;Schema&lt;/strong&gt; =&amp;gt; Es una organizacion logica de datos y codigo, un Database puede contener uno o mas Schemas&lt;/p&gt;
-
-&lt;p&gt;Ej: podemos tener una tabla llamada &lt;em&gt;usuario&lt;/em&gt;, esta tabla la podemos crear en dos Schemas distinos y quedaria algo asi:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;schema1_usuario&lt;/li&gt;
-  &lt;li&gt;schema2_usuario&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;De esta forma, tendremos dos tablas “&lt;em&gt;iguales&lt;/em&gt;” pero creadas en dos Schemas distintos con sus propios datos. Es posible comunicar tablas de distintos Schemas.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Tablespaces&lt;/strong&gt; =&amp;gt; Es un archivo fisico.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Catalog&lt;/strong&gt; =&amp;gt; PostgreSQL, contiene informacion de los objetos que tenemos en nuestra base de datos.&lt;/p&gt;
-
-&lt;p&gt;Al ejecutar &lt;em&gt;psql&lt;/em&gt; estoy ingresando a una Instance, puedo especificarle IP, puerto y otras cosas. Por defecto va a la de localhost.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Archivos de configuracion&lt;/strong&gt; =&amp;gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;postgresql.conf (contiene configuracion propia de la Instance, como su ip, puerto, numero de conexiones, etc…)&lt;/li&gt;
-  &lt;li&gt;pg_hba.conf (contiene los permisos de los usuarios que podran acceder al servidor PostgreSQL)&lt;/li&gt;
-  &lt;li&gt;trust: no pide password&lt;/li&gt;
-  &lt;li&gt;password: pide password, pero la envia en texto plano&lt;/li&gt;
-  &lt;li&gt;md5: pide password, pero la envia encriptada en hash md5&lt;/li&gt;
-  &lt;li&gt;iden: mapea el usuario que se quiere conectar con un usuario de PostgreSQL y ve si calza, e ingresa como el usuario de PostgreSQL&lt;/li&gt;
-  &lt;li&gt;pg_ident.conf (contiene el mapaeo de qye usuario se mapeara con un usuario de PostgreSQL)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;-Comando para encontrar esos archivos:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setting&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_settings&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;category&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'File Locations'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para ver algunos settings del archivo &lt;em&gt;postgresql.conf&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boot_val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reset_val&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_settings&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'listen_addresses'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'max_connections'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'shared_buffers'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'efective_cache_size'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'work_mem'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para setear un campo del archivo &lt;em&gt;postgresql.conf&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ALERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;SYSTEM&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;work_mem&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8192&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_reload_conf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Este comando creara un archivo llamado &lt;em&gt;postgresql.auto.conf&lt;/em&gt; que contrandra todos los cambios de valores, y cuando se reinicie el servidor PostgreSQL, se cargara el archivo &lt;em&gt;postgresql.conf&lt;/em&gt; y luego el &lt;em&gt;postgres.auto.conf&lt;/em&gt; para aplicar todos los cambios que se han hecho y de esta forma no tener que setear los valores cada vez que se quiera reiniciar el servidor PostgreSQL&lt;/p&gt;
-
-&lt;p&gt;-Comando para ver quien esta conectado a nuestra base de datos y cual fue su ultima consulta ejecutada(o ejecutandose):&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_stat_activity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para cancelar la consulta que se esta ejecutando a traves de un cierto usuario:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_cancel_backend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para desconectar un cierto usuario conectado:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_terminate_backend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;roles&quot;&gt;Roles&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Roles&lt;/strong&gt;: es un usuario de una Instance de PostgreSQL&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;roles de sesion: usarios normales que pueden ingresar a la Instance con su password&lt;/li&gt;
-  &lt;li&gt;roles de grupo: grupo de usuarios con ciertos permisos, para darle permisos a los roles de sesion, usaremos los roles de grupo&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;-Comando para crear un rol de sesion:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ROLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;john&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOGIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PASSWORD&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'john123'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para ver los roles y sus permisos que tenemos en nuetsra Instance:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_roles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para eliminar un role:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;DROP&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ROLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;john&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para crear un rol de sesion con md5 password(manera correcta):&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ROLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;john&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOGIN&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ENCRYPTED&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PASSWORD&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'john123'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para crear un rol de sesion que exista hasta una cierta fecha:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘2015-2-20 00:00’&lt;/li&gt;
-  &lt;li&gt;‘infinity’&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ROLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;john&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOGIN&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ENCRYPTED&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PASSWORD&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'john123'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALID&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;UNTIL&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'2015-2-20 00:00'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para crear un rol con ciertos permisos:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;CREATEDB&lt;/li&gt;
-  &lt;li&gt;SUPERUSER&lt;/li&gt;
-  &lt;li&gt;CREATEROLES&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ROLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;john&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOGIN&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ENCRYPTED&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PASSWORD&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'john123'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;CREATEDB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para crear rol de grupo:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ROLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;platzi&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INHERIT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;El rol puede ser de sesion o de grupo&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;-Comando para agregar un rol de sesion a un rol de grupo:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;GRANT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;john&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;platzi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;database&quot;&gt;Database&lt;/h3&gt;
-
-&lt;p&gt;-Comando para crear una base de datos:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DATABASE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;platzi_db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para eliminar una base de datos:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;DROP&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DATABASE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;platzi_db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para asignarle una plantilla a una base de datos al momento de crearla:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DATABASE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;platzi_db&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TEMPLATE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;template1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para restaurar una base de datos a partir de un archivo:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pg_restore -d db_name restore_file
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Templates&lt;/strong&gt; =&amp;gt; Son configuraciones que estan almacenadas, y que al momento de crear una base de datos con esa plantilla, esa base de datos tendra todas esas configuracion, que pueden ser:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;extensiones(postGIS, etc..)&lt;/li&gt;
-  &lt;li&gt;tablas por defecto&lt;/li&gt;
-  &lt;li&gt;roles para esa base de datos&lt;/li&gt;
-  &lt;li&gt;etc..&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;-Comando para crear un template a partir de una base de datos:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;UPDATE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_database&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;SET&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datistemplate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'platzi_db'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;Ya no se podra usar esa base de datos, ya que ahora es un template&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Comando para cambiarme a de una base de datos a otra:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;platzi_db&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;schemas&quot;&gt;Schemas&lt;/h3&gt;
-
-&lt;p&gt;La idea de un Schema es poder tener las tablas agrupas en una misma base de datos, de esta forma si tengo varias tablas relacionadas al manejo de usuarios, las puedo agrupar en un Schema, luego si tengo tablas relacionadas con un inventario, las puedo agrupar en otros Schema, y de esta forma tener un orden en la misma base de datos cuando estas crecen mucho.&lt;/p&gt;
-
-&lt;p&gt;-Comando para crear un Schema (debo estar adentro de una base de datos):&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;SCHEMA&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;schema_inventario&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;privileges&quot;&gt;Privileges&lt;/h3&gt;
-
-&lt;p&gt;-Comando para dar privilegios a una tabla en particular de un schema a un rol:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;GRANT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ALL&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ALL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TABLES&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IN&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;SCHEMA&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;schema_inventario&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;platzi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-Comando para ejecutar &lt;em&gt;“SQL”&lt;/em&gt; directamente desde la terminal, en este caso en particular se le aplican provilegios a una base de datos.&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;psql&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;database_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;&quot;GRANT ALL ON ALL TABLES IN SCHEMA public to user;&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.postgresql.org/docs/9.6/static/sql-grant.html&quot;&gt;Listado de privilegios&lt;/a&gt; y de como sar privilegios a distintos tipos de objetos(tables, schemas, databases, etc…)&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;data-types&quot;&gt;Data Types&lt;/h3&gt;
-
-&lt;p&gt;SEQUENCE: Es un valor entero incremental que no se puede cambiar. Se usa como id de tabla ya que por cada fila, ese valor incrementara.&lt;/p&gt;
-
-&lt;p&gt;VARCHAR: Sirve para guardar cadenas de texto variables, ya que si el maximo es 255, y guardamos una cadena de 10, NO rellenara el resto con espacio, y de esa forma no gastaremos espacio innecesario.&lt;/p&gt;
-
-&lt;p&gt;ARRAY: Guarda un arreglo literalmente para su uso como arreglo en un formato de este tipo: &lt;em&gt;Ej: {1,4,8,9}&lt;/em&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;functions&quot;&gt;Functions&lt;/h3&gt;
-
-&lt;p&gt;-lpad: rellena con un caracter en especial:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;lpad(‘ab’, 3 ,0) =&amp;gt; 0ab&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;-repeat: repite un string:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;repeat(‘-‘, 4) =&amp;gt; —-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;-trim: quita los espacios de la derecha e izuqierda de un string&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;trim(‘   tr    ‘) =&amp;gt; tr&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;-split_part: separa un string por un caracter, los guarda en un arreglo y luego podemos obetner cualquiera de esos:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;split_part(‘312-4657-2947’, ‘-‘, 2) =&amp;gt; 4657&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;-string_to_array: separa un string por un caracter(devuelve un arreglo)&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;string_to_array(‘aaa.bbb.ccc’, ‘.’) =&amp;gt; {aaa,bbb,ccc}&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sat, 11 Feb 2017 00:00:00 -0300</pubDate>
-        <link>/postgresql-cheatsheets.html</link>
-        <guid isPermaLink="true">/postgresql-cheatsheets.html</guid>
         
         
       </item>
