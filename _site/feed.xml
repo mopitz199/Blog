@@ -5,9 +5,43 @@
     <description>I'm a full stack coder, mainly in frameworks like Django and React Native. Also I've been working in teams with Git and standardizing the develops environments with Docker or Vagrant. Welcome to contact me in the bellow social networks.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 20 Oct 2018 13:53:07 -0300</pubDate>
-    <lastBuildDate>Sat, 20 Oct 2018 13:53:07 -0300</lastBuildDate>
+    <pubDate>Sun, 20 Jan 2019 21:31:55 -0300</pubDate>
+    <lastBuildDate>Sun, 20 Jan 2019 21:31:55 -0300</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>React Native Push Notification in IOS Remotely</title>
+        <description>&lt;p&gt;Hi everyone, today I’m bringing you a tutorial to learn how to create remote push notifications in ios using react native&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/zeW8DO5KZ8Q&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+        <pubDate>Sun, 20 Jan 2019 21:31:00 -0300</pubDate>
+        <link>/docs/react-native-push-notification-in-ios-remotely.html</link>
+        <guid isPermaLink="true">/docs/react-native-push-notification-in-ios-remotely.html</guid>
+        
+        
+        <category>docs</category>
+        
+      </item>
+    
+      <item>
+        <title>React Native Push Notification in IOS Locally</title>
+        <description>&lt;p&gt;Hi everyone, today I’m bringing you a tutorial to learn how to create locally push notifications in ios using react native&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/8aaAx6VbY9k&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+        <pubDate>Sun, 20 Jan 2019 21:28:00 -0300</pubDate>
+        <link>/docs/react-native-push-notification-in-ios-locally.html</link>
+        <guid isPermaLink="true">/docs/react-native-push-notification-in-ios-locally.html</guid>
+        
+        
+        <category>docs</category>
+        
+      </item>
     
       <item>
         <title>Avoid multiple render in react native with redux</title>
@@ -15,7 +49,7 @@
 
 &lt;!--more--&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ZpAmjXa1S1I&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/UvkvzwtfAEs&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
         <pubDate>Mon, 01 Oct 2018 00:10:00 -0300</pubDate>
         <link>/docs/avoid-multiple-render-with-react-native-redux.html</link>
@@ -420,46 +454,6 @@ $ docker-compose up
         <pubDate>Wed, 30 Aug 2017 13:46:00 -0300</pubDate>
         <link>/docs/http-services-with-token-react-native.html</link>
         <guid isPermaLink="true">/docs/http-services-with-token-react-native.html</guid>
-        
-        
-        <category>docs</category>
-        
-      </item>
-    
-      <item>
-        <title>Validate react native input</title>
-        <description>&lt;p&gt;Hi everyone, today I want to show a proper way to validate our inputs or forms in react native and how to handle errors.&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/pToI4fxRZE8&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;Before&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/input_without_error.png&quot; style=&quot;width:300px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;After&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/input_with_error.png&quot; style=&quot;width:300px;&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 29 Aug 2017 22:49:00 -0300</pubDate>
-        <link>/docs/validate-react-native-input.html</link>
-        <guid isPermaLink="true">/docs/validate-react-native-input.html</guid>
-        
-        
-        <category>docs</category>
-        
-      </item>
-    
-      <item>
-        <title>Django project with Docker</title>
-        <description>&lt;p&gt;Hi everyone, to create a django project with docker, we will use a this official &lt;a href=&quot;https://docs.docker.com/compose/django/&quot; title=&quot;compose docker django&quot;&gt;link&lt;/a&gt; that explain how to do it.&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/bRof6go80rU&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-</description>
-        <pubDate>Mon, 14 Aug 2017 23:56:00 -0300</pubDate>
-        <link>/docs/django-project-with-docker.html</link>
-        <guid isPermaLink="true">/docs/django-project-with-docker.html</guid>
         
         
         <category>docs</category>
